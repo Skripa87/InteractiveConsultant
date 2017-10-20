@@ -1,0 +1,229 @@
+﻿body {
+    color: #333;
+    background: #ddd center top;
+    font-family: "Trebuchet MS",arial;
+    font-size: 13px;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+@media (min-width:1200px) {
+    .container {
+        width: 100%;
+    }
+}
+
+/*******************************HEADER_CSS**********************************/
+
+#page_helper {
+    width: 1000px;
+    margin: 0px auto;
+}
+
+.container.page_helper, button.btn.btn-default.btn_find {
+    padding: 0px 15px 0px 15px;
+    margin: 0px;
+    font-size: 13px;
+}
+
+.row.header_link {
+    height: 43px;
+    padding-top: 10px;
+}
+
+a.link_mintrud {
+    color: #333;
+}
+
+a.link_appeals {
+    color: #337ab7;
+}
+
+a.link_mintrud, a.link_appeals {
+    text-decoration: underline;
+}
+
+button.btn.btn-default.btn_find {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+input.form-control.input_find {
+    padding: 5px;
+    z-index: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+button.btn.btn-default.btn_find, input.form-control.input_find {
+    height: 23px;
+    border: none;
+    background-color: #f9f9f9;
+}
+
+/******************************CONTENT_CSS**********************************/
+
+.container.content {
+    min-height: 1000px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 10px;
+    box-shadow: 0 0 20px #AAAAAA;
+}
+
+.row.content {
+    background-image: url('Image/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 90px;
+    margin: 0px;
+}
+
+.col-md-2.flag_logo {
+    margin-top: -5px;
+}
+
+img.flag_logo {
+    height: 110px;
+    width: 162px;
+    z-index: 10;
+    position: sticky;
+}
+
+h3.header {
+    font-size: 24px;
+    color: #111;
+    text-shadow: 1px 1px #fff;
+    margin-top: 30px;
+    padding-left: 15px;
+}
+
+/********************************MENU_CSS***********************************/
+#dropdownMenu1 {
+    margin-left: -16%;
+}
+
+.row.main_menu {
+    background: url('Image/menubg.png');
+    height: 51px;
+    padding: 0 10px;
+    box-shadow: 0 0 10px #999999;
+    margin: 0px;
+}
+
+.menu_item {
+    margin-top: 16px;
+}
+
+a.menu_item {
+    text-shadow: 1px 1px #EEEEEE;
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    z-index: 0;
+    padding-top: 17px;
+    cursor: pointer;
+}
+
+    a.menu_item:hover {
+        color: black;
+    }
+
+.dropdown-menu {
+    border-radius: 0px 0px 10px 10px;
+    border: none;
+    margin-top: 5px;
+    background-color: #e9e9e9;
+    z-index: 1;
+}
+
+ul.services, ul.menu_two_cols, ul.family, ul.help {
+    color: #509BBC;
+    text-decoration: underline;
+    list-style: none;
+    padding: 10px 0px 0px 0px;
+}
+
+    ul.menu_two_cols li, ul.services li, ul.family li, ul.help li {
+        margin-bottom: 5px;
+    }
+
+.row.dropdown-menu.menu_two_cols {
+    width: 442px;
+    margin-left: -8px;
+    z-index: 10;
+    background: #ededed url('Image/mbuk.png') no-repeat 0 0;
+}
+
+.row.dropdown-menu.services {
+    margin-left: -10px;
+    width: 246px;
+    z-index: 10;
+    background: #ededed url('Image/mbuk.png') no-repeat 0 0;
+}
+
+.row.dropdown-menu.family {
+    margin-left: -10px;
+    width: 257px;
+    z-index: 10;
+    background: #ededed url('Image/mbuk.png') no-repeat 0 0;
+}
+
+.row.dropdown-menu.help {
+    margin-left: -5px;
+    z-index: 10;
+    background: #ededed url('Image/mbuk.png') no-repeat 0 0;
+}
+/******************************RULES_CSS****************************************/
+#rules-text {
+    padding: 0px 25px 0px 25px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: serif;
+}
+
+h2.rules-header {
+    font-size: 26px;
+    text-align: center;
+    font-family: serif;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.rules-of-greeting {
+    font-weight: 600;
+}
+
+span.important {
+    font-weight: 600;
+}
+
+.btn-default {
+    background-color: #dad7d7;
+}
+
+.rules-attention {
+    margin-top: 15px;
+}
+/*******************************FOOTER_CSS**************************************/
+footer {
+    margin-top: 15px;
+}
+
+.col-md-6.footer-col-1 {
+    padding-right: 85px;
+}
+
+p.footer-text, {
+    margin: 0px;
+}
+
+.develop-text {
+    margin-top: 20px;
+}
+
+.col-md-6.footer-col-2 {
+    text-align: right;
+}

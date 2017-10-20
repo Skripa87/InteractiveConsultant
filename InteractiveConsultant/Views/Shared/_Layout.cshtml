@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <section id="page_helper">
+        <div class="container page_helper">
+            <div class="row header_link">
+                <div class="col-md-2">
+                    <a class="link_mintrud" href="http://mintrudrb.ru">Минтруд РБ</a>
+                </div>
+                <div class="col-md-3 col-md-offset-4">
+                    <img src="~/Content/Image/help_glif.png">
+                    <a class="link_appeals" href="http://rcson.mintrudrb.ru/citizen_issues/new">Обращения граждан</a>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn_find" type="button">
+                                <img src="~/Content/Image/glass_find.png" />
+                            </button>
+                        </span>
+                        <input type="text" class="form-control input_find" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container content">
+            <div class="row content">
+                <div class="col-md-2 flag_logo">
+                    <a href="#">
+                        <img class="flag_logo" src="~/Content/Image/flag_rb.png" />
+                    </a>
+                </div>
+                <div class="col-md-10">
+                    <a href="#">
+                        <h3 class="header">ГКУ Республиканский центр социального обслуживания населения</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="row main_menu">
+                <div class="col-md-3 dropdown dropdown-toggle menu_item" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <a class="menu_item"> Информация об учреждении</a>
+                    <div class="container menu_two_cols">
+                        <div class="row dropdown-menu menu_two_cols" aria-labelledby="dropdownMenu1">
+                            <div class="col-md-6">
+                                <ul class="menu_two_cols">
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/54507'">Об учреждении</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/54510'">Устав</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/71602'">Структура аппарата</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/71605'">Сведения о руководителях</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/events'">Новости</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/gallery'">Фотогалерея</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/special'">Доступная среда</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="menu_two_cols">
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/68309'">Противодействие коррупции</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/54509'">Контактная информация</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 dropdown dropdown-toggle menu_item" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <a class="menu_item"> Услуги</a>
+                    <div class="container services">
+                        <div class="row dropdown-menu services" aria-labelledby="dropdownMenu2">
+                            <div class="col-md-12">
+                                <ul class="services">
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/62142'">Социальные услуги на дому</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/62143'">Социальное обслуживание пожилых граждан и инвалидов в стационарных условиях</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-2 dropdown dropdown-toggle menu_item" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <a class="menu_item"> Приемная семья</a>
+                    <div class="container family">
+                        <div class="row dropdown-menu family" aria-labelledby="dropdownMenu3">
+                            <div class="col-md-12">
+                                <ul class="family">
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/75852'">Порядок создания приемной семьи</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/75853'">Порядок выплаты ежемесячного денежного вознаграждения лицу, осуществляющему уход</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 menu_item">
+                    <a href="http://rcson.mintrudrb.ru/posts/54506" class="menu_item"> Планы и отчеты</a>
+                </div>
+                <div class="col-md-3 dropdown dropdown-toggle menu_item" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <a class="menu_item"> Справочные материалы</a>
+                    <div class="container help">
+                        <div class="row dropdown-menu help" aria-labelledby="dropdownMenu4">
+                            <div class="col-md-12">
+                                <ul class="help">
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/54505'">Нормативно-правовые документы</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/57100'">Формы документов</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="location.href='http://rcson.mintrudrb.ru/posts/70042'">Часто задаваемые вопросы</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row body-content">
+                <div class="col-md-12 body-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container footer">
+                <div class="row">
+                    <div class="col-md-6 footer-col-1">
+                        <p>&copy; 2013-2017 ГКУ Республиканский центр социального обслуживания населения</p>
+                        <p class="footer-text">450022, Республика Башкортостан, г. Уфа, ул. Менделеева, 136/2</p>
+                        <p class="footer-text">Тел.: +7 (347) 286-51-06</p>
+                        <a class="footer-text" href="http://rcson@bashkortostan.ru">rcson@bashkortostan.ru</a>
+                        <p class="develop-text">Интерактивный онлайн-консультант разработал - Скрыпин А.Р.</p>
+                    </div>
+                    <div class="col-md-6 footer-col-2">
+                        <span>
+                            <a class="footer-img" href="http://rosmintrud.ru/"><img src="~/Content/Image/mintrud.png" /></a>
+                            <a class="footer-img" href="https://gosuslugi.bashkortostan.ru/"><img src="~/Content/Image/rpgu.png" /></a>
+                            <a class="footer-img" href="https://www.bashkortostan.ru/"><img src="~/Content/Image/rb.png" /></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $('.col-md-2.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeIn(500);
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(500);
+        });
+        $('.col-md-3.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeIn(500);
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(500);
+        });
+        $('.col-md-1.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeIn(500);
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(500);
+        });
+    </script>
+</body>
+</html>

@@ -11,7 +11,7 @@ namespace InteractiveConsultant.Models
         public int MaxScore { get; set; }
         public int MinScore { get; set; }
         public int PowerExtendOfNeed { get; set; }
-        public ICollection<string> ChsIndividualNeed { get; set; }
+        public virtual ICollection<string> ChsIndividualNeed { get; set; }
         public ExtendOfNeed()
         {
             ICollection<string> ChsIndividualNeed = new List<string>();

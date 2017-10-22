@@ -9,7 +9,7 @@ namespace InteractiveConsultant.Models
     {
         public byte IDQuestion { get; set; }
         public string TextQuestion { get; set; }
-        public ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
         public Question()
         {
             ICollection<Answer> Answers = new List<Answer>();

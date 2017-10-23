@@ -4,6 +4,6 @@
     <h1>@Html.DisplayFor(m => m.TextQuestion)</h1>
     @foreach(var a in Model.Answers)
     {
-        <h3>    </h3>
+        <h3>@Html.RadioButton(a.TextAnswer,a.CheckedAnswer)</h3>
     }
 </div>

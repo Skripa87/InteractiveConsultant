@@ -7,17 +7,18 @@ namespace InteractiveConsultant.Models
 {
     public class ManagerInterview
     {
-        ICollection<Question> questions;
-
         ICollection<ExtendOfNeed> tableBartelLouten;
-
-        Interview interview;
 
         InteractiveConsultantContext context;
 
+        public Interview interview;
+
+        public ICollection<Question> questions;
+        
         public ManagerInterview(InteractiveConsultantContext context)
         {
             this.context = context;
+            this.Agreement = false;
         }
 
         public bool Agreement { get; set; }
@@ -57,13 +58,7 @@ namespace InteractiveConsultant.Models
             {
                 foreach (var q in context.Questions)
                 {
-                    Question que = new Question();
-                    que = q;
-                    foreach (var a in q.Answers)
-                    {
-                        que.Answers.Add(a);
-                    }
-                    questions.Add(que);
+                    questions.Add(q);
                 }
                 foreach(var e in context.TableBartelLouton)
                 {

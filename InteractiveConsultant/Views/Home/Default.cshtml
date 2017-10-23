@@ -1,4 +1,5 @@
-﻿@{
+﻿@using InteractiveConsultant.Models;
+@{
     ViewBag.Title = "Интерактивный консультант";
 }
 
@@ -27,7 +28,7 @@
         <span class="rules">на наличие в отдельных нормативных правовых актах дополнительных условий признания граждан в социальном обслуживании. Ознакомиться с полными условиями и порядком признания граждан нуждающимся в социальных услугах, перечнем необходимых документов, Вы можете в нормативном правовом акте, перейдя по ссылке <a href="#">"Подробнее" (Приказ 696-о от 31.12.2014 МСТиСЗН РБ)</a>.</span>
     </div>
     <div class="rules-consent">
-        <p class="compliance">Я по собственной воле, находясь в трезвом уме и с ясным сознанием, согласен на заполнение анкеты. Претензий к форме и характеру вопросов не имею.</p>
-        <input class="btn btn-default" type="button" value="Продолжить" onclick="location.href='@Url.Action("Index","Interview")'" />
+        <p class="compliance">Я по собственной воле, находясь в трезвом уме и с ясным сознанием, согласен на заполнение анкеты. Претензий к форме и характеру вопросов не имею. @Html.CheckBox("Имя поля формы",((ManagerInterview)ViewBag.Manager).Agreement)</p>
+        <input class="btn btn-default" type="button" value="Продолжить" onclick="location.href='@Url.Action("Index","Interview",new {numberQuestion = 0})'" />
     </div>
 </section>

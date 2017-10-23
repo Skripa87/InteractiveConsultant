@@ -10,12 +10,14 @@ namespace InteractiveConsultant.Models
         public byte IDAnswer { get; set; }
         public string TextAnswer { get; set; }
         public int CostAnswer { get; set; }
+        public bool CheckedAnswer { get; set; }
 
         public virtual ICollection<Interview> Interviews { get; set; }
         
         public Answer()
         {
             ICollection<Interview> Interviews = new List<Interview>();
+            CheckedAnswer = false;
         }
     }
 }

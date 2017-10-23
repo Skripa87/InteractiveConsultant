@@ -5,25 +5,20 @@ using System.Threading.Tasks;
 
 namespace InteractiveConsultant.Models
 {
-    public class ManagerInterview
+    static public class ManagerInterview
     {
-        ICollection<ExtendOfNeed> tableBartelLouten;
+        static ICollection<ExtendOfNeed> tableBartelLouten;
 
-        InteractiveConsultantContext context;
+        static InteractiveConsultantContext context;
 
-        public Interview interview;
-
-        public ICollection<Question> questions;
+        static public bool Agreement { get; set; }
         
-        public ManagerInterview(InteractiveConsultantContext context)
+        static ManagerInterview()
         {
-            this.context = context;
-            this.Agreement = false;
+            context = new InteractiveConsultantContext();
         }
 
-        public bool Agreement { get; set; }
-
-        private int CalculateScores(Interview interview)
+        static private int CalculateScores(Interview interview)
         {
             int sumScore = 0;
             foreach (var a in interview.Answers)
@@ -33,7 +28,7 @@ namespace InteractiveConsultant.Models
             return sumScore;
         }
 
-        private int GetExtendOfNeed()
+        static private int GetExtendOfNeed(Interview interview)
         {
             int score = 0;
             int extendOfNeed = 0;
@@ -48,13 +43,11 @@ namespace InteractiveConsultant.Models
             return extendOfNeed;
         }
 
-        public void StartInterview()
+        static public void StartInterview(ICollection<Question> questions, Interview interview)
         {
-            questions = new List<Question>();
-            interview = new Interview();
             tableBartelLouten = new List<ExtendOfNeed>();
 
-            if (this.Agreement)
+            if (Agreement)
             {
                 foreach (var q in context.Questions)
                 {
@@ -67,10 +60,10 @@ namespace InteractiveConsultant.Models
             }
         }
 
-        public Result GetResultInterview()
+        static public Result GetResultInterview(Interview interview)
         {
             int extendOfNeed = 0;
-            extendOfNeed = GetExtendOfNeed();
+            extendOfNeed = GetExtendOfNeed(interview);
             Result result = new Result(extendOfNeed);
             return result;
         }

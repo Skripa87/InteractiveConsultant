@@ -12,11 +12,9 @@ namespace InteractiveConsultant.Controllers
         static InteractiveConsultantContext db = new InteractiveConsultantContext();
         public ActionResult Default()
         {
-            ManagerInterview _manager = new ManagerInterview(db);
+            ManagerInterview.Agreement = false;
 
-            _manager.Agreement = false;
-
-            ViewBag.Manager = _manager;
+            //ViewBag.Agreement = ManagerInterview.Agreement;
 
             return View();
         }

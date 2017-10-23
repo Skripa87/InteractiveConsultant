@@ -11,20 +11,18 @@ namespace InteractiveConsultant.Controllers
     {
         static InteractiveConsultantContext db = new InteractiveConsultantContext();
 
-        ManagerInterview _manager = new ManagerInterview(db);
-
         ICollection<Question> _questions = new List<Question>();
 
+        Interview interview = new Interview();
+
         // GET: Interview
-        public ActionResult Index(int numberQuestion)
+        public ActionResult Index(bool _checked)
         {
+            ManagerInterview.Agreement = _checked;
 
+            ManagerInterview.StartInterview(_questions, interview);
 
-            _manager.StartInterview();
-
-            _questions = _manager.questions;
-
-            return View(_questions.ElementAt(numberQuestion));
+            return View(_questions.FirstOrDefault());
         }
 
         /*public ActionResult Initial()

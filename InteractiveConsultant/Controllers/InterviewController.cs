@@ -11,13 +11,19 @@ namespace InteractiveConsultant.Controllers
     {
         static InteractiveConsultantContext db = new InteractiveConsultantContext();
 
-        ICollection<Question> _questions = new List<Question>();
+        static ICollection<Question> _questions;
 
-        Interview interview = new Interview();
+        Interview interview;
+
+        int numberQuestion = 0;
 
         // GET: Interview
         public ActionResult Index(bool _checked)
         {
+            interview = new Interview();
+
+            _questions = new List<Question>();
+
             ManagerInterview.Agreement = _checked;
 
             ManagerInterview.StartInterview(_questions, interview);
@@ -27,9 +33,41 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult PreNextQuestion(List<string> proposed_responses)
         {
+            if (_questions.Count > 1)
+            {
+                numberQuestion++;
+                ViewBag.Number = numberQuestion;
 
-            return View();
+                return View(_questions.ElementAt(numberQuestion));
+            }
+            else
+            {
+                return RedirectToAction("Default", "Home");
+            }
+           
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult Initial()
         {

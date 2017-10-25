@@ -1,14 +1,43 @@
 ﻿@model InteractiveConsultant.Models.Question
-@using InteractiveConsultant.Models;
-@{int i = 0; }
-<div>
-    <h1>@Html.DisplayFor(m => m.TextQuestion)</h1>
-    @foreach (var a in Model.Answers)
-    {
-        <h3>
-            @Html.RadioButton("answer", "answer" + i.ToString())
-            @a.TextAnswer
-        </h3>
-        i++;
-    }
+
+<div class="row qestion_set">
+    <div class="col-md-12">
+        <p>@Model.TextQuestion</p>
+    </div>
 </div>
+@using (Html.BeginForm("PreNextQuestion", "Interview"))
+{
+    
+       int i = 0;
+    
+        foreach (var a in Model.Answers)
+        {
+            <div class="row content_body">
+                <div class="col-md-2">
+                    @Html.RadioButton("proposed_responses", "answer_" + i.ToString())
+                </div>
+                <div class="col-md-2">
+                    @if (a.ImagePath != null)
+                    {
+                        <img src=@a.ImagePath />
+                    }
+                </div>
+                <div class="col-md-8">
+                    @if (a.TextAnswer != null)
+                    {
+                        <p class="get_answer">@a.TextAnswer</p>
+                    }
+                </div>
+                i++;
+            </div>
+        }
+        <div class="row get_answer">
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-6">
+                <input class="btn btn-default" value="Следующий вопрос" type="submit" />
+            </div>
+        </div>
+
+        }

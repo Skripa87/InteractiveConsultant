@@ -25,7 +25,13 @@ namespace InteractiveConsultant.Controllers
             return View(_questions.FirstOrDefault());
         }
 
-        /*public ActionResult Initial()
+        public ActionResult PreNextQuestion(List<string> proposed_responses)
+        {
+
+            return View();
+        }
+
+        public ActionResult Initial()
         {
             Question question = new Question();
 
@@ -36,7 +42,6 @@ namespace InteractiveConsultant.Controllers
             for(int i=0; i<2; i++)
             {
                 Answer answer = new Answer();
-                answer.CheckedAnswer = false;
                 answer.CostAnswer = 0;
                 answer.IDAnswer = (byte)(i+1);
                 answer.TextAnswer = $"ответ" + i + $"на вопрос 1";
@@ -48,7 +53,7 @@ namespace InteractiveConsultant.Controllers
             db.Questions.Add(question);
             db.SaveChanges();
             return View();
-        }*/
+        }
        
     }
 }

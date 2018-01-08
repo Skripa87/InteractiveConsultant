@@ -10,14 +10,11 @@
 </div>
 @using (Html.BeginForm("PreNextQuestion", "Interview", FormMethod.Post))
 {
-
-    int i = 0;
-
     foreach (var a in Model.Answers)
     {
         <div class="row content_body">
             <div class="col-md-2">
-                @Html.RadioButton("responses", "answer_" + i.ToString(),false)
+                @Html.RadioButton("responses", a.IDAnswer.ToString(), false)
             </div>
             <div class="col-md-2">
                 @if (a.ImagePath != null)
@@ -31,9 +28,6 @@
                     <p class="get_answer">@a.TextAnswer</p>
                 }
             </div>
-            @{
-                i++;
-            }
         </div>
     }
     <div class="row get_answer">

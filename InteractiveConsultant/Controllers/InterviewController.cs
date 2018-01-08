@@ -17,6 +17,8 @@ namespace InteractiveConsultant.Controllers
 
         static int numberQuestion = 0;
 
+        static List<Answer> answers = new List<Answer>();
+
         // GET: Interview
         public ActionResult Index(bool _checked)
         {
@@ -27,6 +29,11 @@ namespace InteractiveConsultant.Controllers
             ManagerInterview.Agreement = _checked; //Установка переменной "согласие на прохождение опроса" в положение выбранное пользователем
 
             ManagerInterview.StartInterview(_questions, interview); // инициализация всех переменных текущего опроса
+
+            for(int i = 0; i < _questions.Count; i++)
+            {
+                answers.Add(null);
+            }
 
             if (_questions.Count == 0)
             {
@@ -45,6 +52,11 @@ namespace InteractiveConsultant.Controllers
         [HttpPost]
         public ActionResult PreNextQuestion(string action, string responses)
         {
+            if(responses != null)
+            {
+                answers.Insert(numberQuestion, _questions.Select(q => q.Answers).Where(a => a.Where(u => u.IDAnswer.ToString().Equals(responses)).ToList() != null).FirstOrDefault().FirstOrDefault())6;
+            }
+
             if (action == "next")
             {
                 

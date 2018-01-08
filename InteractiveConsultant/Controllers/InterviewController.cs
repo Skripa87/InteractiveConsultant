@@ -20,13 +20,13 @@ namespace InteractiveConsultant.Controllers
         // GET: Interview
         public ActionResult Index(bool _checked)
         {
-            interview = new Interview();
+            interview = new Interview();    // Создание экземпляра класса интервью для текущего пользователя
 
-            _questions = new List<Question>();
+            _questions = new List<Question>(); // Создание экземпляра класса List Вопросов
 
-            ManagerInterview.Agreement = _checked;
+            ManagerInterview.Agreement = _checked; //Установка переменной "согласие на прохождение опроса" в положение выбранное пользователем
 
-            ManagerInterview.StartInterview(_questions, interview);
+            ManagerInterview.StartInterview(_questions, interview); // инициализация всех переменных текущего опроса
 
             if (_questions.Count == 0)
             {
@@ -42,10 +42,12 @@ namespace InteractiveConsultant.Controllers
             return View(_questions.FirstOrDefault());
         }
 
-        public ActionResult PreNextQuestion(string action, List<string> proposed_responses)
+        [HttpPost]
+        public ActionResult PreNextQuestion(string action, string responses)
         {
             if (action == "next")
             {
+                
                 if ((_questions.Count > 1) && (numberQuestion < _questions.Count - 1))
                 {
                     numberQuestion++;

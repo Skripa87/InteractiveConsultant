@@ -13,7 +13,7 @@ namespace InteractiveConsultant.Controllers
 
         static ICollection<Question> _questions;
 
-        Interview interview;
+        static Interview interview;
 
         int numberQuestion = 0;
 
@@ -28,26 +28,62 @@ namespace InteractiveConsultant.Controllers
 
             ManagerInterview.StartInterview(_questions, interview);
 
-            return View(_questions.FirstOrDefault());
-        }
-
-        public ActionResult PreNextQuestion(List<string> proposed_responses)
-        {
-            if (_questions.Count > 1)
-            {
-                numberQuestion++;
-                ViewBag.Number = numberQuestion;
-
-                return View(_questions.ElementAt(numberQuestion));
-            }
-            else
+            if (_questions.Count == 0)
             {
                 return RedirectToAction("Default", "Home");
             }
-           
+
+            return View(_questions.FirstOrDefault());
         }
 
+        public ActionResult StartInterview()
+        {
+            return View(_questions.FirstOrDefault());
+        }
 
+        public ActionResult PreNextQuestion(string action, List<string> proposed_responses)
+        {
+            if (action == "next")
+            {
+                if ((_questions.Count > 1) && (numberQuestion < _questions.Count - 1))
+                {
+                    numberQuestion++;
+
+                    ViewBag.Number = numberQuestion;
+
+                    return View(_questions.ElementAt(numberQuestion)); //если переходим к следующему вопросу
+                }
+                else if (numberQuestion == _questions.Count - 1)
+                {
+                    return RedirectToAction("Default", "Home"); //организовать переход к результату
+                }
+                else
+                {
+                    return RedirectToAction("Default", "Home"); //организовать если вопрос всего один
+                }
+            }
+            if(action == "previos")
+            {
+                if (numberQuestion > 1)
+                {
+                    numberQuestion--;
+
+                    ViewBag.Number = numberQuestion;
+
+                    return View(_questions.ElementAt(numberQuestion)); //если переходим к предыдущему вопросу
+                }
+                else if (numberQuestion == 1)
+                {
+                    return RedirectToAction("StartInterview");
+                }                
+            }
+            return View();
+        }
+
+        public ActionResult ResultPage()
+        {
+            return View();
+        }
 
 
 
@@ -77,11 +113,11 @@ namespace InteractiveConsultant.Controllers
 
             ICollection<Answer> answers = new List<Answer>();
 
-            for(int i=0; i<2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 Answer answer = new Answer();
                 answer.CostAnswer = 0;
-                answer.IDAnswer = (byte)(i+1);
+                answer.IDAnswer = (byte)(i + 1);
                 answer.TextAnswer = $"ответ" + i + $"на вопрос 1";
                 answers.Add(answer);
             }
@@ -92,6 +128,6 @@ namespace InteractiveConsultant.Controllers
             db.SaveChanges();
             return View();
         }
-       
+
     }
 }

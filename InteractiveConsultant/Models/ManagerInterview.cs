@@ -53,11 +53,11 @@ namespace InteractiveConsultant.Models
                 {
                     questions.Add(q);
                 }
-                foreach(var e in context.TableBartelLouton)
+                foreach (var e in context.TableBartelLouton)
                 {
                     tableBartelLouten.Add(e);
                 }
-            }
+            }             
         }
 
         static public Result GetResultInterview(Interview interview)

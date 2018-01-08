@@ -1,12 +1,16 @@
 ﻿@model InteractiveConsultant.Models.Question
 
 <div class="row qestion_set">
-    <div class="col-md-12">
+    <div class="col-md-2">
+        <p>@ViewBag.Number</p>
+    </div>
+    <div class="col-md-10">
         <p>@Model.TextQuestion</p>
     </div>
 </div>
 @using (Html.BeginForm("PreNextQuestion", "Interview"))
 {
+
     int i = 0;
 
     foreach (var a in Model.Answers)
@@ -31,11 +35,8 @@
         </div>
     }
     <div class="row get_answer">
-        <div class="col-md-6">
-            <button name="action" class="btn btn-default" value="previos">Предыдущий вопрос</button>
-        </div>
-        <div class="col-md-6">
-            <button name="action" class="btn btn-default" value="next">Следующий вопрос</button>
+        <div class="col-md-12">
+            <input class="btn btn-default" value="Следующий вопрос" type="submit" />
         </div>
     </div>
 

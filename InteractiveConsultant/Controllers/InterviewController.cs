@@ -15,7 +15,7 @@ namespace InteractiveConsultant.Controllers
 
         static Interview interview;
 
-        int numberQuestion = 0;
+        static int numberQuestion = 0;
 
         // GET: Interview
         public ActionResult Index(bool _checked)
@@ -38,6 +38,7 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult StartInterview()
         {
+            numberQuestion--;
             return View(_questions.FirstOrDefault());
         }
 
@@ -79,7 +80,7 @@ namespace InteractiveConsultant.Controllers
             }
             return View();
         }
-
+                
         public ActionResult ResultPage()
         {
             return View();

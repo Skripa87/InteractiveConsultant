@@ -17,17 +17,19 @@
             </div>
             <div class="col-md-2">
                 @if (a.ImagePath != null)
-                    {
+                {
                     <img src=@a.ImagePath />
                 }
             </div>
             <div class="col-md-8">
                 @if (a.TextAnswer != null)
-                    {
+                {
                     <p class="get_answer">@a.TextAnswer</p>
                 }
             </div>
-            i++;
+            @{
+                i++;
+            }
         </div>
     }
     <div class="row get_answer">

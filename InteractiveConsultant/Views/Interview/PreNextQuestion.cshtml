@@ -1,9 +1,9 @@
 ﻿@model InteractiveConsultant.Models.Question
-
+@{byte checker = 255; }
 <div class="row qestion_set">
     <div class="col-md-12">
         <p>@Model.TextQuestion</p>
-    </div>
+    </div>    
 </div>
 @using (Html.BeginForm("PreNextQuestion", "Interview", FormMethod.Post))
 {
@@ -11,7 +11,15 @@
     {
         <div class="row content_body">
             <div class="col-md-2">
-                @Html.RadioButton("responses", a.IDAnswer.ToString(),false)
+                @if (ViewData["AnswerID"] != null)
+                {
+                    checker = (byte)ViewData["AnswerID"];
+                }
+                else
+                {
+                    checker = 255;
+                }
+                @Html.RadioButton("responses", a.IDAnswer.ToString(), a.IDAnswer.Equals(checker));
             </div>
             <div class="col-md-2">
                 @if (a.ImagePath != null)

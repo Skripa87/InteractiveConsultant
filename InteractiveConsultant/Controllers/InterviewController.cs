@@ -13,7 +13,7 @@ namespace InteractiveConsultant.Controllers
 
         static ICollection<Question> _questions;
 
-        static Interview interview;
+        static Interview _interview;
 
         static int numberQuestion = 0;
 
@@ -22,22 +22,26 @@ namespace InteractiveConsultant.Controllers
         // GET: Interview
         public ActionResult Index(bool _checked)
         {
-            interview = new Interview();    // Создание экземпляра класса интервью для текущего пользователя
+            _interview = new Interview();    // Создание экземпляра класса интервью для текущего пользователя
 
             _questions = new List<Question>(); // Создание экземпляра класса List Вопросов
 
             ManagerInterview.Agreement = _checked; //Установка переменной "согласие на прохождение опроса" в положение выбранное пользователем
 
-            ManagerInterview.StartInterview(_questions, interview); // инициализация всех переменных текущего опроса
+            ManagerInterview.StartInterview(_questions, _interview); // инициализация всех переменных текущего опроса
 
             for(int i = 0; i < _questions.Count; i++)
             {
                 answers.Add(null);
             }
-
             if (_questions.Count == 0)
             {
-                return RedirectToAction("Default", "Home");
+                return RedirectToAction("Default", "Home"); // Организовать переход к результату
+            }
+
+            if (answers[0] != null)
+            {
+                ViewData["AnswerID"] = answers[0].IDAnswer;
             }
 
             return View(_questions.FirstOrDefault());
@@ -45,52 +49,58 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult StartInterview()
         {
-            numberQuestion--;
+
+            if (answers[0] != null)
+            {
+                ViewData["AnswerID"] = answers[0].IDAnswer;
+            }
+
             return View(_questions.FirstOrDefault());
         }
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult PreNextQuestion(string action, string responses)
         {
-            if(responses != null)
+            if (responses != null)
             {
-                answers.Insert(numberQuestion, _questions.Select(q => q.Answers).Where(a => a.Where(u => u.IDAnswer.ToString().Equals(responses)).ToList() != null).FirstOrDefault().FirstOrDefault())6;
+                answers[numberQuestion] = _questions.ElementAt(numberQuestion).Answers.Where(a => a.IDAnswer.ToString().Equals(responses)).FirstOrDefault();
             }
-
-            if (action == "next")
+            if (action.Equals("next") && (numberQuestion < _questions.Count-1))
             {
-                
-                if ((_questions.Count > 1) && (numberQuestion < _questions.Count - 1))
-                {
-                    numberQuestion++;
+                numberQuestion++;
 
-                    ViewBag.Number = numberQuestion;
+                if(answers[numberQuestion]!=null)
+                {
+                    ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
+                }
 
-                    return View(_questions.ElementAt(numberQuestion)); //если переходим к следующему вопросу
-                }
-                else if (numberQuestion == _questions.Count - 1)
-                {
-                    return RedirectToAction("Default", "Home"); //организовать переход к результату
-                }
-                else
-                {
-                    return RedirectToAction("Default", "Home"); //организовать если вопрос всего один
-                }
+                return View(_questions.ElementAt(numberQuestion));
             }
-            if(action == "previos")
+            else if (action.Equals("previos") && (numberQuestion > 1))
             {
-                if (numberQuestion > 1)
+                numberQuestion--;
+
+                if (answers[numberQuestion] != null)
                 {
-                    numberQuestion--;
-
-                    ViewBag.Number = numberQuestion;
-
-                    return View(_questions.ElementAt(numberQuestion)); //если переходим к предыдущему вопросу
+                    ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 }
-                else if (numberQuestion == 1)
+
+                return View(_questions.ElementAt(numberQuestion)); //если переходим к предыдущему вопросу
+            }
+            else if (action.Equals("previos") && (numberQuestion == 1))
+            {
+                numberQuestion--;
+
+                if (answers[numberQuestion] != null)
                 {
-                    return RedirectToAction("StartInterview");
-                }                
+                    ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
+                }
+
+                return RedirectToAction("StartInterview");
+            }
+            else if (action.Equals("next") && (numberQuestion == _questions.Count-1))
+            {
+                return RedirectToAction("Default", "Home"); //Необходимо реализовать переход к результату
             }
             return View();
         }

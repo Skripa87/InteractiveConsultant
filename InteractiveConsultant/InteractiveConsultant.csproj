@@ -213,6 +213,7 @@
     <Content Include="Views\Interview\Index.cshtml" />
     <Content Include="Views\Interview\PreNextQuestion.cshtml" />
     <Content Include="Views\Interview\StartInterview.cshtml" />
+    <Content Include="Views\Interview\Initial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

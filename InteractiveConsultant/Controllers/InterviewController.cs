@@ -58,7 +58,7 @@ namespace InteractiveConsultant.Controllers
             return View(_questions.FirstOrDefault());
         }
 
-        //[HttpPost]
+        [HttpPost]
         public ActionResult PreNextQuestion(string action, string responses)
         {
             if (responses != null)
@@ -91,9 +91,9 @@ namespace InteractiveConsultant.Controllers
             {
                 numberQuestion--;
 
-                if (answers[numberQuestion] != null)
+                if (answers[0] != null)
                 {
-                    ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
+                    ViewData["AnswerID"] = answers[0].IDAnswer;
                 }
 
                 return RedirectToAction("StartInterview");

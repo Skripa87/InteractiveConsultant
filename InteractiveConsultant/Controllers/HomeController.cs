@@ -13,5 +13,18 @@ namespace InteractiveConsultant.Controllers
         {
             return View();
         }
+
+        public ActionResult ErrorCompliteUser(string action)
+        {
+            if(action == "start")
+            {
+                return RedirectToAction("Default", "Home");
+            }
+            else 
+            {
+                return Redirect("http://mintrudrb.ru");
+            }
+            //return View();
+        }
     }
 }

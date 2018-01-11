@@ -1,6 +1,34 @@
 ﻿
 @{
-    ViewBag.Title = "Initial";
+    ViewBag.Title = "Интерактивный консультант";
 }
 
-<h2>HGKGHKGKJGHKHGKHGKJGKGHKH</h2>
+<div class="row">
+<div class="col-md-12 body-content">
+    <section id="rules-text">
+        <div class="rules-header">
+            <h2 class="rules-header"> ИНТЕРАКТИВНЫЙ ОНЛАЙН-КОНСУЛЬТАНТ ПО СОЦИАЛЬНОМУ ОБСЛУЖИВАНИЮ НАСЕЛЕНИЯ</h2>
+        </div>
+        <div class="rules-of-greeting">
+            <h3 class="rules-of-greeting">Уважаемый пользователь!</h3>
+        </div>
+        <div class="rules">
+            <p class="rules">Вы не дали согласие на прохождение данного опроса, что противоречит правилам данного интернет ресурса!</p>
+            <p class="rules">В связи с этим Вы можете</p>
+        </div>
+        <div class="rules-consent">
+            @using (Html.BeginForm("ErrorCompliteUser", "Home"))
+            {
+                <div class="row get_answer">
+                    <div class="col-md-6">
+                        <button name="action" class="btn btn-default" value="start">Пройти опрос</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button name="action" class="btn btn-default" value="mintrud">Перейти на сайт Минтруда</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</div>
+</div>

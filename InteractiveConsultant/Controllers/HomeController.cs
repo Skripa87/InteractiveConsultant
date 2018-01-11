@@ -8,5 +8,10 @@ namespace InteractiveConsultant.Controllers
         {
             return View();
         }
+
+        public ActionResult ErrorAgree()
+        {
+            return View();
+        }
     }
 }

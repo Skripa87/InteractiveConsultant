@@ -101,14 +101,20 @@ namespace InteractiveConsultant.Controllers
             }
             else if (action.Equals("next") && (numberQuestion == _questions.Count-1))
             {
-                return RedirectToAction("Default", "Home"); //Необходимо реализовать переход к результату
+                return RedirectToAction("ResultPage", "Interview"); //Необходимо реализовать переход к результату
             }
             return View();
         }
                 
         public ActionResult ResultPage()
         {
-            return View();
+            _interview.Answers = new List<Answer>();
+            foreach (var a in answers)
+            {
+                _interview.Answers.Add(a);
+            }
+            ManagerInterview.GetResultInterview(_interview);
+            return View(_interview);
         }
 
 

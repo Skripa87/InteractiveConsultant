@@ -1,0 +1,21 @@
+﻿@model InteractiveConsultant.Models.Interview
+
+<div class="row">
+    <div class="col-md-12 body-content">
+        <section id="rules-text">
+            <div class="rules-header">
+                <h2 class="rules-header"> ИНТЕРАКТИВНЫЙ ОНЛАЙН-КОНСУЛЬТАНТ ПО СОЦИАЛЬНОМУ ОБСЛУЖИВАНИЮ НАСЕЛЕНИЯ</h2>
+            </div>
+            <div class="rules-of-greeting">
+                <h3 class="rules-of-greeting">Уважаемый пользователь!</h3>
+            </div>
+            <div class="rules">
+                <p class="rules">По результату проведенного опроса и выбранных Вами ответов:</p>
+                <p class="rules">@Model.TextResult</p>                
+            </div>
+            <div class="rules-consent">
+                <a href="http://mintrudrb.ru">Перейти на сайт Минтруда!</a>
+            </div>
+        </section>
+    </div>
+</div>

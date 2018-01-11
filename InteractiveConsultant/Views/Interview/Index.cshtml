@@ -1,5 +1,4 @@
 ﻿@model InteractiveConsultant.Models.Question
-@{bool checker = false; }
 <div class="row qestion_set">
     <div class="col-md-12">
         <p>@Model.TextQuestion</p>
@@ -11,10 +10,14 @@
     {
         <div class="row content_body">
             <div class="col-md-2">
-                @{
-                    checker = a.IDAnswer.Equals(ViewData["AnswerID"]);
+                @if ((ViewData["AnswerID"]!=null) &&((byte)ViewData["AnswerID"] == (byte)a.IDAnswer))
+                {
+                    <input type="radio" name="responses" value="@a.IDAnswer.ToString()" checked />
                 }
-                @Html.RadioButton("responses", a.IDAnswer.ToString(), checker);
+                else
+                {
+                    <input type="radio" name="responses" value="@a.IDAnswer.ToString()" />
+                }                
             </div>
             <div class="col-md-2">
                 @if (a.ImagePath != null)

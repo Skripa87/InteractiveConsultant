@@ -39,9 +39,9 @@ namespace InteractiveConsultant.Controllers
                 return RedirectToAction("Default", "Home"); // Организовать переход к результату
             }
 
-            if (answers[0] != null)
+            if (answers[numberQuestion] != null)
             {
-                ViewData["AnswerID"] = answers[0].IDAnswer;
+                ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
             }
 
             return View(_questions.FirstOrDefault());
@@ -50,9 +50,9 @@ namespace InteractiveConsultant.Controllers
         public ActionResult StartInterview()
         {
 
-            if (answers[0] != null)
+            if (answers[numberQuestion] != null)
             {
-                ViewData["AnswerID"] = answers[0].IDAnswer;
+                ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
             }
 
             return View(_questions.FirstOrDefault());

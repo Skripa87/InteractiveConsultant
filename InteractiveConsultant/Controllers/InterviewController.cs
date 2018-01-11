@@ -26,6 +26,11 @@ namespace InteractiveConsultant.Controllers
 
             _questions = new List<Question>(); // Создание экземпляра класса List Вопросов
 
+            if (_checked == false)
+            {
+                return RedirectToAction("ErrorAgree", "Home"); // Организовать переход к результату
+            }
+
             ManagerInterview.Agreement = _checked; //Установка переменной "согласие на прохождение опроса" в положение выбранное пользователем
 
             ManagerInterview.StartInterview(_questions, _interview); // инициализация всех переменных текущего опроса
@@ -33,10 +38,6 @@ namespace InteractiveConsultant.Controllers
             for(int i = 0; i < _questions.Count; i++)
             {
                 answers.Add(null);
-            }
-            if (_questions.Count == 0)
-            {
-                return RedirectToAction("Default", "Home"); // Организовать переход к результату
             }
 
             if (answers[numberQuestion] != null)

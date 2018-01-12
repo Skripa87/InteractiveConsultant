@@ -113,7 +113,8 @@ namespace InteractiveConsultant.Controllers
             {
                 _interview.Answers.Add(a);
             }
-            ManagerInterview.GetResultInterview(_interview);
+            Result result = ManagerInterview.GetResultInterview(_interview);
+            _interview.TextResult = result.TextResult;
             return View(_interview);
         }
 

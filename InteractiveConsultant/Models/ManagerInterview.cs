@@ -23,7 +23,10 @@ namespace InteractiveConsultant.Models
             int sumScore = 0;
             foreach (var a in interview.Answers)
             {
-                sumScore += a.CostAnswer;
+                if (a != null)
+                {
+                    sumScore += a.CostAnswer;
+                }
             }
             return sumScore;
         }

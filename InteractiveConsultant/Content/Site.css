@@ -14,11 +14,25 @@
     }
 }
 
+.row.loyout{
+    margin:0px;
+    padding:0px;
+}
+
+.col-md-12.loyout{
+    margin:0px;
+    padding:0px;
+}
+
 /*******************************HEADER_CSS**********************************/
 
 #page_helper {
     width: 1000px;
     margin: 0px auto;
+}
+
+.container.default_page{
+    padding:0px;
 }
 
 .container.page_helper, button.btn.btn-default.btn_find {
@@ -183,6 +197,11 @@ ul.services, ul.menu_two_cols, ul.family, ul.help {
     font-family: serif;
 }
 
+form.default_page{
+    padding-left:0px;
+    padding-right:0px;
+}
+
 h2.rules-header {
     font-size: 26px;
     text-align: center;
@@ -216,7 +235,7 @@ footer {
     padding-right: 85px;
 }
 
-p.footer-text, {
+p.footer-text {
     margin: 0px;
 }
 
@@ -226,4 +245,55 @@ p.footer-text, {
 
 .col-md-6.footer-col-2 {
     text-align: right;
+}
+
+/*******************************Questions*********************************/
+.container.questions {
+    padding-top: 40px;
+    font: 400 21px san-serif;
+    background-color:mintcream;
+}
+
+.row.qestion-set{
+    padding:45px;
+}
+
+p.question {
+    font-size: 26px;
+    font-family: arial;
+    text-align: center;
+    font-weight: bold;
+}
+
+.row.content_body {
+    margin-bottom: 17px;
+    background-color:ghostwhite;
+    max-height:135px;
+}
+
+form {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.col-md-1.cheker {
+    padding-top:50px;
+}
+
+.col-md-8.question-answer{
+    padding-top:50px;
+}
+
+input.qestion_set{
+    width:20px;
+    height:20px;
+}
+
+.btn.btn-default{
+    font-family:sans-serif;
+    font-size:17px;
+}
+
+.col-md-6.right{
+    text-align:right;
 }

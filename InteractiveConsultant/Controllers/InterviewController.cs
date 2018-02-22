@@ -19,6 +19,8 @@ namespace InteractiveConsultant.Controllers
 
         static List<Answer> answers = new List<Answer>();
 
+        static List<bool> checkQuestions = new List<bool>();
+
         // GET: Interview
         public ActionResult Index(bool _checked)
         {
@@ -35,11 +37,20 @@ namespace InteractiveConsultant.Controllers
 
             ManagerInterview.StartInterview(_questions, _interview); // инициализация всех переменных текущего опроса
 
-            for(int i = 0; i < _questions.Count; i++)
+            for (int i = 0; i < _questions.Count; i++)
             {
                 answers.Add(null);
+                checkQuestions.Add(false);
             }
-
+            for (int i = 0; i < _questions.Count; i++)
+            {
+                if (answers[i] != null)
+                {
+                    checkQuestions[i] = true;
+                }
+                else checkQuestions[i] = false;
+            }
+            ViewData["Cheker"] = checkQuestions;
             if (answers[numberQuestion] != null)
             {
                 ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
@@ -50,7 +61,15 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult StartInterview()
         {
-
+            for (int i = 0; i < _questions.Count; i++)
+            {
+                if (answers[i] != null)
+                {
+                    checkQuestions[i] = true;
+                }
+                else checkQuestions[i] = false;
+            }
+            ViewData["Cheker"] = checkQuestions;
             if (answers[numberQuestion] != null)
             {
                 ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
@@ -66,11 +85,19 @@ namespace InteractiveConsultant.Controllers
             {
                 answers[numberQuestion] = _questions.ElementAt(numberQuestion).Answers.Where(a => a.IDAnswer.ToString().Equals(responses)).FirstOrDefault();
             }
-            if (action.Equals("next") && (numberQuestion < _questions.Count-1))
+            for (int i = 0; i < _questions.Count; i++)
+            {
+                if (answers[i] != null)
+                {
+                    checkQuestions[i] = true;
+                }
+                else checkQuestions[i] = false;
+            }
+            if (action.Equals("next") && (numberQuestion < _questions.Count - 1))
             {
                 numberQuestion++;
-
-                if(answers[numberQuestion]!=null)
+                ViewData["Cheker"] = checkQuestions;
+                if (answers[numberQuestion] != null)
                 {
                     ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 }
@@ -80,7 +107,7 @@ namespace InteractiveConsultant.Controllers
             else if (action.Equals("previos") && (numberQuestion > 1))
             {
                 numberQuestion--;
-
+                ViewData["Cheker"] = checkQuestions;
                 if (answers[numberQuestion] != null)
                 {
                     ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
@@ -91,7 +118,7 @@ namespace InteractiveConsultant.Controllers
             else if (action.Equals("previos") && (numberQuestion == 1))
             {
                 numberQuestion--;
-
+                ViewData["Cheker"] = checkQuestions;
                 if (answers[0] != null)
                 {
                     ViewData["AnswerID"] = answers[0].IDAnswer;
@@ -99,13 +126,24 @@ namespace InteractiveConsultant.Controllers
 
                 return RedirectToAction("StartInterview");
             }
-            else if (action.Equals("next") && (numberQuestion == _questions.Count-1))
+            else if (action.Equals("next") && (numberQuestion == _questions.Count - 1))
             {
                 return RedirectToAction("ResultPage", "Interview"); //Необходимо реализовать переход к результату
             }
+            else if (action.Contains("page"))
+            {
+                numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 1));
+                ViewData["Cheker"] = checkQuestions;
+                if (answers[numberQuestion] != null)
+                {
+                    ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
+                }
+                return View(_questions.ElementAt(numberQuestion));
+            }
+
             return View();
         }
-                
+
         public ActionResult ResultPage()
         {
             _interview.Answers = new List<Answer>();

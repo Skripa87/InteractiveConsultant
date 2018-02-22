@@ -281,7 +281,7 @@ form {
 }
 
 .col-md-8.question-answer{
-    padding-top:50px;
+    padding-top:25px;
 }
 
 input.qestion_set{
@@ -296,4 +296,12 @@ input.qestion_set{
 
 .col-md-6.right{
     text-align:right;
+}
+
+.row.navigation{
+    margin-top:25px;
+}
+
+.btn.btn-default.green {
+    background-color:greenyellow;
 }

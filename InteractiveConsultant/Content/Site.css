@@ -8,6 +8,10 @@
     display: block;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 @media (min-width:1200px) {
     .container {
         width: 100%;
@@ -251,7 +255,6 @@ p.footer-text {
 .container.questions {
     padding-top: 40px;
     font: 400 21px san-serif;
-    background-color:mintcream;
 }
 
 .row.qestion-set{
@@ -259,16 +262,17 @@ p.footer-text {
 }
 
 p.question {
-    font-size: 26px;
-    font-family: arial;
+    font-size: 28px;
     text-align: center;
     font-weight: bold;
+    margin-bottom:30px;
 }
 
 .row.content_body {
     margin-bottom: 17px;
-    background-color:ghostwhite;
-    max-height:140px;
+    background-color: #f7f7fd;
+    max-height: 160px;
+    border-style: outset;
 }
 
 form {

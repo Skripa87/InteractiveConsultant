@@ -1,7 +1,7 @@
 ﻿@model InteractiveConsultant.Models.Question
 <div class="container questions">
     <div class="row qestion_set">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12">
             <p class="question">@Model.TextQuestion</p>
         </div>
     </div>
@@ -10,7 +10,7 @@
         foreach (var a in Model.Answers)
         {
             <div class="row content_body">
-                <div class="col-md-1 cheker">
+                <div class="col-md-1 col-sm-1 cheker">
                     @if ((ViewData["AnswerID"] != null) && ((byte)ViewData["AnswerID"] == (byte)a.IDAnswer))
                     {
                         <input class="qestion_set" type="radio" name="responses" value="@a.IDAnswer.ToString()" checked />
@@ -20,13 +20,13 @@
                         <input class="qestion_set" type="radio" name="responses" value="@a.IDAnswer.ToString()" />
                     }
                 </div>
-                <div class="col-md-3 question-img">
+                <div class="col-md-3 col-sm-3 question-img">
                     @if (a.ImagePath != null)
                     {
                         <img class="img-responsive" src=@a.ImagePath />
                     }
                 </div>
-                <div class="col-md-8 question-answer">
+                <div class="col-md-8 col-sm-8 question-answer">
                     @if (a.TextAnswer != null)
                     {
                         <p class="get_answer">@a.TextAnswer</p>
@@ -34,16 +34,21 @@
                 </div>
             </div>
         }
-        <div class="row get_answer">
-            <div class="col-md-6 left">
+            string buttonName = "Следующий вопрос";
+            if (Model.IDQuestion == ((List<bool>)ViewData["Cheker"]).Count)
+            {
+                buttonName = "Завершить";
+            }
+       <div class="row get_answer">
+            <div class="col-md-6 col-sm-6 left">
                 <button name="action" class="btn btn-default" value="previos">Предыдущий вопрос</button>
             </div>
-            <div class="col-md-6 right">
-                <button name="action" class="btn btn-default" value="next">Следующий вопрос</button>
+            <div class="col-md-6 col-sm-6 right">
+                <button name="action" class="btn btn-default" value="next">@buttonName</button>
             </div>
         </div>
         <div class="row navigation">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12">
                 @{  int i = 0;
                     string val = "",cl = "";
                     foreach (var b in (List<bool>)ViewData["Cheker"])

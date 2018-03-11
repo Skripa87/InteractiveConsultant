@@ -35,7 +35,7 @@
             </div>
         }
             string buttonName = "Следующий вопрос";
-            if (Model.IDQuestion == ((List<bool>)ViewData["Cheker"]).Count)
+            if (Model.IDQuestion == (((List<bool>)ViewData["Cheker"]).Count+2))
             {
                 buttonName = "Завершить";
             }

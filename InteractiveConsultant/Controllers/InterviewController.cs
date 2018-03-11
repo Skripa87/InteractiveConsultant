@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using InteractiveConsultant.Models;
+using System.Speech.Synthesis;
+using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace InteractiveConsultant.Controllers
 {
@@ -79,7 +83,7 @@ namespace InteractiveConsultant.Controllers
         }
 
         [HttpPost]
-        public ActionResult PreNextQuestion(string action, string responses)
+        public async Task<ActionResult> PreNextQuestion(string action, string responses)
         {
             if (responses != null)
             {
@@ -101,7 +105,12 @@ namespace InteractiveConsultant.Controllers
                 {
                     ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 }
-
+                Task task = new Task(() => {
+                    SpeechSynthesizer spech = new SpeechSynthesizer();
+                    spech.SetOutputToDefaultAudioDevice();
+                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+                });
+                task.Start();
                 return View(_questions.ElementAt(numberQuestion));
             }
             else if (action.Equals("previos") && (numberQuestion > 1))
@@ -112,8 +121,13 @@ namespace InteractiveConsultant.Controllers
                 {
                     ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 }
-
-                return View(_questions.ElementAt(numberQuestion)); //если переходим к предыдущему вопросу
+                Task task = new Task(() => {
+                    SpeechSynthesizer spech = new SpeechSynthesizer();
+                    spech.SetOutputToDefaultAudioDevice();
+                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+                });
+                task.Start();
+                return View(_questions.ElementAt(numberQuestion));                
             }
             else if (action.Equals("previos") && (numberQuestion == 1))
             {
@@ -123,7 +137,12 @@ namespace InteractiveConsultant.Controllers
                 {
                     ViewData["AnswerID"] = answers[0].IDAnswer;
                 }
-
+                Task task = new Task(() => {
+                    SpeechSynthesizer spech = new SpeechSynthesizer();
+                    spech.SetOutputToDefaultAudioDevice();
+                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+                });
+                task.Start();
                 return RedirectToAction("StartInterview");
             }
             else if (action.Equals("next") && (numberQuestion == _questions.Count - 1))
@@ -138,9 +157,14 @@ namespace InteractiveConsultant.Controllers
                 {
                     ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 }
+                Task task = new Task(() => {
+                    SpeechSynthesizer spech = new SpeechSynthesizer();
+                    spech.SetOutputToDefaultAudioDevice();
+                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+                });
+                task.Start();
                 return View(_questions.ElementAt(numberQuestion));
             }
-
             return View();
         }
 
@@ -155,27 +179,7 @@ namespace InteractiveConsultant.Controllers
             _interview.TextResult = result.TextResult;
             return View(_interview);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         public ActionResult Initial()
         {
             Question question = new Question();

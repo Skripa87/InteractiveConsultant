@@ -5,7 +5,8 @@ namespace InteractiveConsultant.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class InteractiveConsultantContext : DbContext
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    public class InteractiveConsultantContext : DbContext
     {
         public InteractiveConsultantContext()
             : base("name=InteractiveConsultantContext")

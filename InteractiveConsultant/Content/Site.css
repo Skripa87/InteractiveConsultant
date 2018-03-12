@@ -293,9 +293,10 @@ input.qestion_set{
     height:20px;
 }
 
-.btn.btn-default{
-    font-family:sans-serif;
-    font-size:17px;
+.btn.btn-default {
+    font-family: sans-serif;
+    font-size: 17px;
+    margin-left: 390px;
 }
 
 .col-md-6.right{

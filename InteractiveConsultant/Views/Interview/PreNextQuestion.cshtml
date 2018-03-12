@@ -33,18 +33,13 @@
                     }
                 </div>
             </div>
-        }
-            string buttonName = "Следующий вопрос";
-            if (Model.IDQuestion == (((List<bool>)ViewData["Cheker"]).Count+2))
-            {
-                buttonName = "Завершить";
-            }
+        }            
        <div class="row get_answer">
             <div class="col-md-6 col-sm-6 left">
                 <button name="action" class="btn btn-default" value="previos">Предыдущий вопрос</button>
             </div>
             <div class="col-md-6 col-sm-6 right">
-                <button name="action" class="btn btn-default" value="next">@buttonName</button>
+                <button name="action" class="btn btn-default" value="next">"Следующий вопрос"</button>
             </div>
         </div>
         <div class="row navigation">

@@ -59,7 +59,12 @@ namespace InteractiveConsultant.Controllers
             {
                 ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
             }
-
+            Task task = new Task(() => {
+                SpeechSynthesizer spech = new SpeechSynthesizer();
+                spech.SetOutputToDefaultAudioDevice();
+                spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+            });
+            task.Start();
             return View(_questions.FirstOrDefault());
         }
 
@@ -78,7 +83,12 @@ namespace InteractiveConsultant.Controllers
             {
                 ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
             }
-
+            Task task = new Task(() => {
+                SpeechSynthesizer spech = new SpeechSynthesizer();
+                spech.SetOutputToDefaultAudioDevice();
+                spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+            });
+            task.Start();
             return View(_questions.FirstOrDefault());
         }
 
@@ -147,11 +157,11 @@ namespace InteractiveConsultant.Controllers
             }
             else if (action.Equals("next") && (numberQuestion == _questions.Count - 1))
             {
-                return RedirectToAction("ResultPage", "Interview"); //Необходимо реализовать переход к результату
+                return RedirectToAction("PreIncome", "Interview"); //Необходимо реализовать переход к результату
             }
             else if (action.Contains("page"))
             {
-                numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 1));
+                numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 2));
                 ViewData["Cheker"] = checkQuestions;
                 if (answers[numberQuestion] != null)
                 {
@@ -168,7 +178,7 @@ namespace InteractiveConsultant.Controllers
             return View();
         }
 
-        public ActionResult ResultPage()
+        public ActionResult ResultPage(List<string> zp)
         {
             _interview.Answers = new List<Answer>();
             foreach (var a in answers)
@@ -180,27 +190,14 @@ namespace InteractiveConsultant.Controllers
             return View(_interview);
         }
         
-        public ActionResult Initial()
+        public ActionResult PreIncome()
         {
-            Question question = new Question();
+            return View();
+        }
 
-            ICollection<Question> questions = new List<Question>();
-
-            ICollection<Answer> answers = new List<Answer>();
-
-            for (int i = 0; i < 2; i++)
-            {
-                Answer answer = new Answer();
-                answer.CostAnswer = 0;
-                answer.IDAnswer = (byte)(i + 1);
-                answer.TextAnswer = $"ответ" + i + $"на вопрос 1";
-                answers.Add(answer);
-            }
-            question.IDQuestion = 1;
-            question.TextQuestion = $"Вопрос 1";
-            question.Answers = answers;
-            db.Questions.Add(question);
-            db.SaveChanges();
+        public ActionResult Income(string countPeople)
+        {
+            ViewData["countPeople"] = countPeople;
             return View();
         }
 

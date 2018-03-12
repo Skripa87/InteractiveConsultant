@@ -1,0 +1,26 @@
+﻿<div class="container questions">
+    <div class="row qestion_set">
+        <div class="col-md-12 col-sm-12">
+            <p class="question">Введите среднюю зароботную плату в месяц для каждого члена семьи</p>
+        </div>
+    </div>
+    @using (Html.BeginForm("ResultPage", "Interview", FormMethod.Post))
+    {
+        for (int i = 0; i <= Convert.ToInt32((string)ViewData["countPeople"]); i++)
+        {
+            <div class="row content_body">
+                <div class="col-md-10">
+                    <input class="qestion_set" type="text" name="zp" />
+                </div>
+                <div class="col-md-2">
+                    <p class="cost">руб.</p>
+                </div>
+            </div>
+        }
+        <div class="row content_body">
+            <div class="col-md-12">
+                <input class="btn btn-default" type="submit" value="Завершить опрос" />
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,23 @@
+﻿<div class="container questions">
+    <div class="row qestion_set">
+        <div class="col-md-12 col-sm-12">
+            <p class="question">Введите количество членов семьи</p>
+        </div>
+    </div>
+    @using (Html.BeginForm("Income", "Interview", FormMethod.Post))
+    {
+        <div class="row content_body">
+            <div class="col-md-12">
+                <input class="qestion_set" type="text" name="countPeople"/>
+            </div> 
+        </div>
+        <div class="row content_body">
+            <div class="col-md-12">
+                <input class="btn btn-default" type="submit" value="Продолжить" />
+            </div>
+        </div>
+    }
+</div>
+
+
+

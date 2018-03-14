@@ -19,7 +19,7 @@ namespace InteractiveConsultant.Controllers
 
         static Interview _interview;
 
-        static int numberQuestion = 0;
+        static int numberQuestion = 0, _countFamilyPeople = 0;
 
         static List<Answer> answers = new List<Answer>();
 
@@ -93,7 +93,7 @@ namespace InteractiveConsultant.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PreNextQuestion(string action, string responses)
+        public ActionResult PreNextQuestion(string action, string responses)
         {
             if (responses != null)
             {
@@ -161,7 +161,7 @@ namespace InteractiveConsultant.Controllers
             }
             else if (action.Contains("page"))
             {
-                numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 2));
+                numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 1));
                 ViewData["Cheker"] = checkQuestions;
                 if (answers[numberQuestion] != null)
                 {
@@ -178,15 +178,48 @@ namespace InteractiveConsultant.Controllers
             return View();
         }
 
-        public ActionResult ResultPage(List<string> zp)
+        public ActionResult ResultPage(List<string> revenues)
         {
+            Income income = new Income(_countFamilyPeople);
+            income.SetIncome(revenues);
             _interview.Answers = new List<Answer>();
             foreach (var a in answers)
             {
                 _interview.Answers.Add(a);
             }
             Result result = ManagerInterview.GetResultInterview(_interview);
+            var answs_1 = _questions.Where(q => q.TextQuestion.Contains("возраст")).FirstOrDefault().Answers.Select(a=>a.TextAnswer);
+            var answs_2 = _questions.Where(q => q.TextQuestion.Contains("пол.")).FirstOrDefault().Answers.Select(a => a.TextAnswer); ;
+            string peopleGroup = answers.Where(a => answs_1.Contains(a.TextAnswer)).FirstOrDefault().TextAnswer;
+            string gender = answers.Where(a => answs_2.Contains(a.TextAnswer)).FirstOrDefault().TextAnswer;
+            if (peopleGroup.Contains("Дети")|| peopleGroup.Contains("Подростки"))
+            {
+                income.PVSDD = 13489.5;
+            }
+            else if(peopleGroup.Contains("Пенсионеры"))
+            {
+                income.PVSDD = 10945.5;
+            }
+            else if(peopleGroup.Contains("Трудоспособные в возрасте") && gender.Contains("Женский"))
+            {
+                income.PVSDD = 10945.5;
+            }
+            else
+            {
+                income.PVSDD = 14247;
+            }
+            if(income.GetResultSDDFamily() && (result.TextResult.Contains("Бесплатно") == false))
+            {
+                _interview.TextResult = result.TextResult;
+            }
+            else
             _interview.TextResult = result.TextResult;
+            Task task = new Task(() => {
+                SpeechSynthesizer spech = new SpeechSynthesizer();
+                spech.SetOutputToDefaultAudioDevice();
+                spech.Speak(_interview.TextResult);
+            });
+            task.Start();
             return View(_interview);
         }
         
@@ -197,6 +230,7 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult Income(string countPeople)
         {
+            _countFamilyPeople = Convert.ToInt32(countPeople);
             ViewData["countPeople"] = countPeople;
             return View();
         }

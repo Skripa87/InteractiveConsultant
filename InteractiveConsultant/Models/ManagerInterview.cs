@@ -8,29 +8,21 @@ namespace InteractiveConsultant.Models
     static public class ManagerInterview
     {
         static ICollection<ExtendOfNeed> tableBartelLouten;
-
         static InteractiveConsultantContext context;
-
         static public bool Agreement { get; set; }
-        
         static ManagerInterview()
         {
             context = new InteractiveConsultantContext();
         }
-
         static private int CalculateScores(Interview interview)
         {
             int sumScore = 0;
             foreach (var a in interview.Answers)
             {
-                if (a != null)
-                {
-                    sumScore += a.CostAnswer;
-                }
+                if (a != null) sumScore += a.CostAnswer;
             }
             return sumScore;
         }
-
         static private int GetExtendOfNeed(Interview interview)
         {
             int score = 0;
@@ -38,10 +30,7 @@ namespace InteractiveConsultant.Models
             score = CalculateScores(interview);
             foreach(var t in tableBartelLouten)
             {
-                if ((score < t.MaxScore) && (score > t.MinScore))
-                {
-                    extendOfNeed = t.PowerExtendOfNeed;
-                }
+                if ((score <= t.MaxScore) && (score >= t.MinScore)) extendOfNeed = t.PowerExtendOfNeed;
             }
             return extendOfNeed;
         }
@@ -68,6 +57,7 @@ namespace InteractiveConsultant.Models
             int extendOfNeed = 0;
             extendOfNeed = GetExtendOfNeed(interview);
             Result result = new Result(extendOfNeed);
+            interview.TextResult = result.TextResult;
             return result;
         }
     }

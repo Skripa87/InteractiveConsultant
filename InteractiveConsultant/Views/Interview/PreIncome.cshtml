@@ -1,15 +1,18 @@
 ﻿<div class="container questions">
     <div class="row qestion_set">
         <div class="col-md-12 col-sm-12">
-            <p class="question">Введите количество членов семьи</p>
+            <p class="question">Для определения условий предоставления социального обслуживания в зависимости от средне-душевого дохода семьи, необходимо ввести количество совместно проживающих родственников</p>
         </div>
     </div>
     @using (Html.BeginForm("Income", "Interview", FormMethod.Post))
     {
         <div class="row content_body">
-            <div class="col-md-12 col-sm-12">
-                <input class="input_count_people" type="text" name="countPeople"/>
-            </div> 
+            <div class="col-md-10 col-sm-10">
+                <input class="input_count_people" type="text" name="countPeople" pattern="[0-9]{,3}"/> 
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <p> человек(а).</p>
+            </div>
         </div>
         <div class="row content_body">
             <div class="col-md-12 col-sm-12">

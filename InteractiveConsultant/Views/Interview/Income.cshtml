@@ -1,16 +1,16 @@
 ﻿<div class="container questions">
     <div class="row qestion_set">
         <div class="col-md-12 col-sm-12">
-            <p class="question">Введите среднюю зароботную плату в месяц для каждого члена семьи</p>
+            <p class="question">Для определения условий предоставления социального обслуживания в зависимости от средне-душевого дохода семьи, необходимо ввести среднюю зароботную плату за месяц для каждого члена семьи</p>
         </div>
     </div>
     @using (Html.BeginForm("ResultPage", "Interview", FormMethod.Post))
     {
-        for (int i = 0; i < Convert.ToInt32((string)ViewData["countPeople"]); i++)
+        for (int i = 1; i <= (int)ViewData["countPeople"]; i++)
         {
             <div class="row content_body">
                 <div class="col-md-10 col-sm-10">
-                    <input class="set-income" type="text" name="revenues" />
+                    <input class="set-income" type="text" name="revenues" pattern="\d+(,\d{2})?"/>
                 </div>
                 <div class="col-md-2 col-sm-2">
                     <p class="cost">руб.</p>

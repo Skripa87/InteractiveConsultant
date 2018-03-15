@@ -263,8 +263,7 @@ p.footer-text {
 
 p.question {
     font-size: 28px;
-    text-align: center;
-    font-weight: bold;
+    text-align: left;
     margin-bottom:30px;
 }
 
@@ -308,4 +307,11 @@ input.qestion_set{
 
 .btn.btn-default.green {
     background-color:greenyellow;
+}
+
+span.voicerONDefault {
+    margin-left: 67%;
+}
+.row.voicer {
+    margin-top: 18px;
 }

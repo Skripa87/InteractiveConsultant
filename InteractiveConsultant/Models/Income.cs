@@ -19,15 +19,30 @@ namespace InteractiveConsultant.Models
 
         public void SetIncome(IEnumerable<object> _income)
         {
-            foreach(var i in _income)
+            if (_income != null)
             {
-                Revenue.Add(Convert.ToDouble(i));
+                foreach (var i in _income)
+                {
+                    try
+                    {
+                        Revenue.Add(Convert.ToDouble(i));
+                    }
+                    catch
+                    {
+                        Revenue.Add(0);
+                    }
+                }
+            }
+            else
+            {
+                Revenue.Add(0);
             }
         }
 
         public bool GetResultSDDFamily()
         {
-            return ((((1.0 / 3.0) * Revenue.Sum()) / FamilyPeopleCount) < PVSDD);
+            if (FamilyPeopleCount == 0) return false;
+            else return ((((1.0 / 3.0) * Revenue.Sum()) / FamilyPeopleCount) < PVSDD);
         }
     }
 }

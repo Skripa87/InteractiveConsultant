@@ -2,7 +2,7 @@
 <div class="container questions">
     <div class="row qestion_set">
         <div class="col-md-12 col-sm-12">
-            <p class="question">@Model.TextQuestion</p>
+            <p class="question">1. @Model.TextQuestion</p>
         </div>
     </div>
     @using (Html.BeginForm("PreNextQuestion", "Interview", FormMethod.Post))
@@ -60,5 +60,16 @@
                 }
             </div>
         </div>
-                            }
+        <div class="row voicer">
+            <div class="col-md-4 col-sm-4">
+                <span class="voicerON"><img src="~/Content/Image/voicer.png" />@Html.CheckBox("_voicerON")  Вкл/Выкл голос</span>
+            </div>            
+            <div class="col-md-4 col-sm-4">
+                <button name="action" class="btn btn-default" value="end">Завершить</button>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <button name="action" class="btn btn-default" value="endIncome">Внести доходы</button>
+            </div>
+        </div>
+                    }
 </div>

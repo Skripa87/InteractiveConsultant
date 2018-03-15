@@ -1,5 +1,4 @@
-﻿@model InteractiveConsultant.Models.Interview
-<div class="container">
+﻿<div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12 body-content">
             <section id="rules-text">
@@ -11,20 +10,12 @@
                 </div>
                 <div class="rules">
                     <p class="rules">По результату проведенного опроса и выбранных Вами ответов:</p>
-                    <p class="rules">@Model.TextResult</p>
+                    <p class="rules">В соответствии с законодательством Российской Федерации к сожалению мы не можем оказать Вам социальные услуги. Советуем Вам обратится за помощью в Ваше посольство.</p>
+                </div>
+                <div class="rules-consent">
+                    <a href="http://mintrudrb.ru">Перейти на сайт Минтруда!</a>
                 </div>
             </section>
         </div>
     </div>
-    @using (Html.BeginForm("ErrorCompliteUser", "Home"))
-            {
-        <div class="row get_answer">
-            <div class="col-md-6 col-sm-6">
-                <button name="action" class="btn btn-default" value="start">Повторить</button>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <button name="action" class="btn btn-default" value="mintrud">Перейти на сайт Минтруда</button>
-            </div>
-        </div>
-    }
 </div>

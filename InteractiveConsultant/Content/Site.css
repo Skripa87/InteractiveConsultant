@@ -18,14 +18,14 @@ a:hover {
     }
 }
 
-.row.loyout{
-    margin:0px;
-    padding:0px;
+.row.loyout {
+    margin: 0px;
+    padding: 0px;
 }
 
-.col-md-12.loyout{
-    margin:0px;
-    padding:0px;
+.col-md-12.loyout {
+    margin: 0px;
+    padding: 0px;
 }
 
 /*******************************HEADER_CSS**********************************/
@@ -35,8 +35,8 @@ a:hover {
     margin: 0px auto;
 }
 
-.container.default_page{
-    padding:0px;
+.container.default_page {
+    padding: 0px;
 }
 
 .container.page_helper, button.btn.btn-default.btn_find {
@@ -201,9 +201,9 @@ ul.services, ul.menu_two_cols, ul.family, ul.help {
     font-family: serif;
 }
 
-form.default_page{
-    padding-left:0px;
-    padding-right:0px;
+form.default_page {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 h2.rules-header {
@@ -257,21 +257,19 @@ p.footer-text {
     font: 400 21px san-serif;
 }
 
-.row.qestion-set{
-    padding:45px;
+.row.qestion-set {
+    padding: 45px;
 }
 
 p.question {
     font-size: 28px;
     text-align: left;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
 .row.content_body {
     margin-bottom: 17px;
-    background-color: #f7f7fd;
-    max-height: 160px;
-    border-style: outset;
+    max-height: 160px;    
 }
 
 form {
@@ -280,16 +278,16 @@ form {
 }
 
 .col-md-1.cheker {
-    padding-top:50px;
+    padding-top: 50px;
 }
 
-.col-md-8.question-answer{
-    padding-top:25px;
+.col-md-8.question-answer {
+    padding-top: 5%;
 }
 
-input.qestion_set{
-    width:20px;
-    height:20px;
+input.qestion_set {
+    width: 20px;
+    height: 20px;
 }
 
 .btn.btn-default {
@@ -297,21 +295,40 @@ input.qestion_set{
     font-size: 17px;
 }
 
-.col-md-6.right{
-    text-align:right;
+.col-md-6.right {
+    text-align: right;
 }
 
-.row.navigation{
-    margin-top:25px;
+.row.navigation {
+    margin-top: 25px;
 }
 
 .btn.btn-default.green {
-    background-color:greenyellow;
+    background-color: greenyellow;
 }
 
 span.voicerONDefault {
     margin-left: 67%;
 }
+
 .row.voicer {
     margin-top: 18px;
+}
+
+.get_answer {
+    font: 400 22px sans-serif;
+}
+
+label.checked{
+    background-image:url('Image/checker.png');
+    background-repeat:no-repeat;
+    width:40px;
+    height:40px;
+}
+
+label.unchecked {
+    background-image: url('Image/cher.png');
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
 }

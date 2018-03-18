@@ -220,6 +220,8 @@
     <Content Include="Content\Image\bg.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\checker.png" />
+    <Content Include="Content\Image\cher.png" />
     <Content Include="Content\Image\example-1.png" />
     <Content Include="Content\Image\example-2.png" />
     <Content Include="Content\Image\flag_rb.png" />
@@ -228,6 +230,7 @@
     <Content Include="Content\Image\mbuk.png" />
     <Content Include="Content\Image\menubg.png" />
     <Content Include="Content\Image\mintrud.png" />
+    <Content Include="Content\Image\ramka.png" />
     <Content Include="Content\Image\rb.png" />
     <Content Include="Content\Image\rpgu.png" />
     <Content Include="Content\Image\voicer.png" />

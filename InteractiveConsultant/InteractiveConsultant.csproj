@@ -186,6 +186,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Image\bgquestionsblock.png" />
+    <Content Include="Content\Image\bottom.png" />
     <Content Include="Content\Image\11.png" />
     <Content Include="Content\Image\12.png" />
     <Content Include="Content\Image\13.png" />

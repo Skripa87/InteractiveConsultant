@@ -14,13 +14,13 @@
         {
             <div class="row content_body">
                 @{namerad = "radio" + iter.ToString();}
-                <div class="col-md-3 col-sm-3 question-img">
+                <div class="col-md-2 col-sm-2 question-img">
                     @if (a.ImagePath != null)
                     {
                         <label for="@namerad"><img class="img-circle" src=@a.ImagePath /></label>
                     }
                 </div>
-                <div class="col-md-8 col-sm-8 question-answer">
+                <div class="col-md-9 col-sm-9 question-answer">
                     @if (a.TextAnswer != null)
                     {
                         <label for="@namerad"><span class="get_answer">@a.TextAnswer</span></label>
@@ -29,7 +29,7 @@
                 <div class="col-md-1 col-sm-1 cheker">
                     @if ((ViewData["AnswerID"] != null) && ((byte)ViewData["AnswerID"] == (byte)a.IDAnswer))
                     {
-                        <label class="checked" for="@namerad">
+                        <label class="checked swing" for="@namerad">
                             <input id="@namerad" class="qestion_set" type="radio" name="responses" value="@a.IDAnswer.ToString()" checked hidden />
                         </label>
                     }

@@ -255,10 +255,14 @@ p.footer-text {
 .container.questions {
     padding-top: 40px;
     font: 400 21px san-serif;
+    background-color: whitesmoke;
 }
 
 .row.qestion-set {
     padding: 45px;
+    background-image: url(Image/ramka.png);
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 p.question {
@@ -267,9 +271,24 @@ p.question {
     margin-bottom: 30px;
 }
 
+.row.qestion_set {
+    background-image: url(Image/ramka.png);
+}
+
 .row.content_body {
-    margin-bottom: 17px;
-    max-height: 160px;    
+    margin-bottom: 35px;
+    max-height: 160px;
+    background-image: url(Image/bottom.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding-bottom: 25px;
+    padding-right: 18px;
+    border-color: white;
+    border-style: outset;
+    padding-left: 10px;
+    background-color: white;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 form {
@@ -281,8 +300,8 @@ form {
     padding-top: 50px;
 }
 
-.col-md-8.question-answer {
-    padding-top: 5%;
+.col-md-9.question-answer {
+    
 }
 
 input.qestion_set {
@@ -315,20 +334,125 @@ span.voicerONDefault {
     margin-top: 18px;
 }
 
+span.get_answer {
+    vertical-align: middle;
+    position: absolute;
+}
+
 .get_answer {
     font: 400 22px sans-serif;
 }
 
-label.checked{
-    background-image:url('Image/checker.png');
-    background-repeat:no-repeat;
-    width:40px;
-    height:40px;
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: -webkit-left;
+    text-align: left;
+    vertical-align: middle;
+}
+
+label.checked {
+    background-image: url(Image/checker.png);
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 80px;
+    margin-top: -25px;
 }
 
 label.unchecked {
     background-image: url('Image/cher.png');
     background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
+    margin-top: -25px;
+}
+
+.rotate:hover {
+    -webkit-transform: rotateY(20deg);
+    -ms-transform: rotateY(20deg);
+    transform: rotateY(20deg);
+}
+
+@-webkit-keyframes swing {
+    15% {
+        -webkit-transform: rotateY(60deg);
+        -ms-transform: rotateY(60deg);
+        transform: rotateY(60deg);
+    }
+
+    30% {
+        -webkit-transform: rotateY(120deg);
+        -ms-transform: rotateY(120deg);
+        transform: rotateY(120deg);
+    }
+
+    40% {
+        -webkit-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    50% {
+        -webkit-transform: rotateY(240deg);
+        -ms-transform: rotateY(240deg);
+        transform: rotateY(240deg);
+    }
+
+    65% {
+        -webkit-transform: rotateY(300deg);
+        -ms-transform: rotateY(300deg);
+        transform: rotateY(300deg);
+    }
+
+    100% {
+        -webkit-transform: rotateY(360deg);
+        -ms-transform: rotateY(360deg);
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes swing {
+    15% {
+        -webkit-transform: rotateY(60deg);
+        -ms-transform: rotateY(60deg);
+        transform: rotateY(60deg);
+    }
+
+    30% {
+        -webkit-transform: rotateY(120deg);
+        -ms-transform: rotateY(120deg);
+        transform: rotateY(120deg);
+    }
+
+    40% {
+        -webkit-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    50% {
+        -webkit-transform: rotateY(240deg);
+        -ms-transform: rotateY(240deg);
+        transform: rotateY(240deg);
+    }
+
+    65% {
+        -webkit-transform: rotateY(300deg);
+        -ms-transform: rotateY(300deg);
+        transform: rotateY(300deg);
+    }
+
+    100% {
+        -webkit-transform: rotateY(360deg);
+        -ms-transform: rotateY(360deg);
+        transform: rotateY(360deg);
+    }
+}
+
+.swing:active {
+    -webkit-animation: swing 1s ease;
+    animation: swing 1s ease;
+    -webkit-animation-iteration-count: 2;
+    animation-iteration-count: 2;
 }

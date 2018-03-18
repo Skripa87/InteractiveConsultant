@@ -194,8 +194,8 @@
             $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(500);
             });
         $('.unchecked').click(function () {
-            $(document).find('.checked').addClass('unchecked').removeClass('checked');
-            $(this).addClass('checked').removeClass('unchecked');
+            $(document).find('.checked').addClass('unchecked').removeClass('checked').removeClass('swing');
+            $(this).addClass('checked').removeClass('unchecked').addClass('swing');
         })
     </script>
 </body>

@@ -175,7 +175,7 @@
     </section>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap")    
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         $('.col-md-2.dropdown').hover(function () {
@@ -196,7 +196,7 @@
         $('.unchecked').click(function () {
             $(document).find('.checked').addClass('unchecked').removeClass('checked').removeClass('swing');
             $(this).addClass('checked').removeClass('unchecked').addClass('swing');
-        })
-    </script>
+        })        
+    </script>    
 </body>
 </html>

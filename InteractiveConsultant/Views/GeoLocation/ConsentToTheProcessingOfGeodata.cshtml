@@ -1,0 +1,18 @@
+﻿<div class="container questions">
+    <div class="row qestion_set">
+        <div class="col-md-12 col-sm-12">
+            <p class="question">Для осуществления поиска Вашего местонахождения, нам необходимо получить Ваши геоданные. Нажмите на кнопку "Согласие" если согласны предоставить геоданные иначе нажмите "Отказ"</p>
+        </div>
+    </div>
+    @using (Html.BeginForm("ProcessingOfGeodata", "GeoLocation", FormMethod.Post))
+    {
+        <div class="row content_body">
+            <div class="col-md-6 col-sm-6">
+                <button name="action" class="btn btn-default" value="Yes" />
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <button name="action" class="btn btn-default" value="No" />
+            </div>
+        </div>
+    }
+</div>

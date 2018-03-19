@@ -258,21 +258,24 @@ p.footer-text {
     background-color: whitesmoke;
 }
 
-.row.qestion-set {
-    padding: 45px;
-    background-image: url(Image/ramka.png);
+.row.qestion_set {
+    background-image: url(Image/bgque.png);
     background-repeat: no-repeat;
     background-size: contain;
+    padding-bottom: 50px;
+    padding-top: 15px;
+    padding-left: 36px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 11px;
+    border-top-left-radius: 55px;
+    border-top-right-radius: 55px;
 }
 
 p.question {
     font-size: 28px;
-    text-align: left;
+    text-align: center;
     margin-bottom: 30px;
-}
-
-.row.qestion_set {
-    background-image: url(Image/ramka.png);
 }
 
 .row.content_body {
@@ -455,4 +458,9 @@ label.unchecked {
     animation: swing 1s ease;
     -webkit-animation-iteration-count: 2;
     animation-iteration-count: 2;
+}
+
+#map-canvas.col-md-12.geolocation{
+    width:400px;
+    height:400px;
 }

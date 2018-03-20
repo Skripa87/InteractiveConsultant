@@ -460,7 +460,7 @@ label.unchecked {
     animation-iteration-count: 2;
 }
 
-#map-canvas.col-md-12.geolocation{
+#map_canvas {
     width:400px;
     height:400px;
 }

@@ -18,24 +18,22 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult ControlProcessingOfGeodata(string action)
         {
-            if (action == "Yes") { return RedirectToAction("ProcessingOfGeodata",new { this.HttpContext}); }
+            if (action == "Yes") { return RedirectToAction("ProcessingOfGeodata"); }
             else { return RedirectToAction("UsersInputLocation"); }
         }
 
-        public ActionResult ProcessingOfGeodata(HttpContext httpContext)
+        public ActionResult ProcessingOfGeodata()
         {
-            XmlApiMaster _manager = new XmlApiMaster(httpContext);
+            XmlApiMaster _manager = new XmlApiMaster(HttpContext);
+            LocationUser userLocation = new LocationUser();
             var location = _manager.GetLocationsName();
-            LocationUser locationUser = new LocationUser();
-            List<string> coords = new List<string>();
-            if (location.Select(l => l.Key).Where(k => k.Equals("city")).FirstOrDefault() != null) { locationUser.City = location["city"]; } else { locationUser.City = "";}
-            if (location.Select(l => l.Key).Where(k => k.Equals("country")).FirstOrDefault() != null) { locationUser.Country = location["country"]; } else { locationUser.Country = ""; }
-            if (location.Select(l => l.Key).Where(k => k.Equals("region")).FirstOrDefault() != null) { locationUser.Region = location["region"]; } else { locationUser.Region = ""; }
-            if (location.Select(l => l.Key).Where(k => k.Equals("district")).FirstOrDefault() != null) { locationUser.District = location["district"]; } else { locationUser.District = ""; }
-            if (location.Select(l => l.Key).Where(k => k.Equals("lng")).FirstOrDefault() != null) { coords.Add(location["lng"]); } else { coords.Add(""); }
-            if (location.Select(l => l.Key).Where(k => k.Equals("lat")).FirstOrDefault() != null) { coords.Add(location["lat"]); } else { coords.Add(""); }
-            locationUser.SetLatLng(coords);
-            return View();
+            if (location.Select(l => l.Key).Where(k => k.Equals("city")).FirstOrDefault() != null) { userLocation.City = location["city"]; } else { userLocation.City = "";}
+            if (location.Select(l => l.Key).Where(k => k.Equals("country")).FirstOrDefault() != null) { userLocation.Country = location["country"]; } else { userLocation.Country = ""; }
+            if (location.Select(l => l.Key).Where(k => k.Equals("region")).FirstOrDefault() != null) { userLocation.Region = location["region"]; } else { userLocation.Region = ""; }
+            if (location.Select(l => l.Key).Where(k => k.Equals("district")).FirstOrDefault() != null) { userLocation.District = location["district"]; } else { userLocation.District = ""; }
+            if (location.Select(l => l.Key).Where(k => k.Equals("lng")).FirstOrDefault() != null) { Coords.Lng = location["lng"].Replace(',','.'); } else { Coords.Lng = ""; }
+            if (location.Select(l => l.Key).Where(k => k.Equals("lat")).FirstOrDefault() != null) { Coords.Lat = location["lat"].Replace(',','.'); } else { Coords.Lat = ""; }
+            return View(userLocation);
         }
     }
 }

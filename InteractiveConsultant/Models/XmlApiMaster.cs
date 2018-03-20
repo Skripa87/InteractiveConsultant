@@ -11,30 +11,25 @@ namespace InteractiveConsultant.Models
     public class XmlApiMaster
     {
         private string _ipUser;
-        private string urlService = "http://ipgeobase.ru:7020/geo?ip=";
+        private string urlService = "http://ipgeobase.ru:7020/geo?ip=109.187.205.68";
 
-        public XmlApiMaster(HttpContext httpContext)
+        public XmlApiMaster(HttpContextBase httpContext)
         {
-            _ipUser = httpContext.Request.UserHostAddress;
+            _ipUser = "";//httpContext.Request.UserHostAddress;
             urlService += _ipUser;
         }
 
         public Dictionary<string, string> GetLocationsName()
         {
-            const string TEMP = "tempFile.XML";
             try
             {
                 Dictionary<string, string> locations = new Dictionary<string, string>();
                 System.Net.WebRequest request = System.Net.WebRequest.Create(urlService);
                 System.Net.WebResponse response = request.GetResponse();
                 Stream stream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(stream);
-                string outResult = reader.ReadToEnd();
-                reader.Close();
-                File.AppendAllText(TEMP, outResult);
                 XmlDocument xdoc = new XmlDocument();
                 List<XmlElement> elements = new List<XmlElement>();
-                xdoc.Load(TEMP);
+                xdoc.Load(stream);
                 xdoc.Normalize();
                 XmlElement xroot = xdoc.DocumentElement;
                 XmlElement xip = xroot.GetElementsByTagName("ip").Cast<XmlElement>().FirstOrDefault();
@@ -48,7 +43,6 @@ namespace InteractiveConsultant.Models
                 {
                     if (element != null){ locations.Add(element.Name, element.InnerText); }
                 }
-                File.Delete(TEMP);
                 return locations;
             }
             catch

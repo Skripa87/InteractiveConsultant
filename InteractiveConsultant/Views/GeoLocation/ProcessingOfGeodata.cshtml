@@ -1,29 +1,13 @@
 ﻿@model InteractiveConsultant.Models.LocationUser
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
-<div class="container geolocation">
-    <div class="row geolocation">
+<div class="container questions geolocation">
+    <div class="row qestion_set geolocation">
         <div class="col-md-12 col-sm-12">
             <h2>Ваше местоположение</h2>
         </div>
     </div>
-    <div class="row geolocation">
-        <div id="map-canvas" class="col-md-12 col-sm-12 geolocation">
+    <div class="row content_body geolocation">
+        <div class="col-md-12 col-sm-12 geolocation" onload="initialize()">
+            <div id="map_canvas" style="width:400px;height:400px;"></div>
         </div>
     </div>
 </div>
-<script>
-    window.onload= function initialize() {
-            var myLatlng = new google.maps.LatLng(@Model.LatLng);
-            var myOptions = {
-                zoom: 8,
-                center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-            var point = new google.maps.LatLng(@Model.LatLng);
-            var marker = new google.maps.Marker({
-                position: point,
-                map: map
-            });
-        }
-</script>

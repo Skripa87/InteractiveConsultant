@@ -175,7 +175,7 @@
     </section>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")    
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         $('.col-md-2.dropdown').hover(function () {
@@ -192,11 +192,28 @@
             $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeIn(500);
         }, function () {
             $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(500);
-            });
+        });
         $('.unchecked').click(function () {
             $(document).find('.checked').addClass('unchecked').removeClass('checked').removeClass('swing');
             $(this).addClass('checked').removeClass('unchecked').addClass('swing');
-        })        
-    </script>    
+        })
+    </script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&key=AIzaSyAyKKgyRN2gJLwRZXQSvzVEyk4akN1YTxE"></script>
+    <script type="text/javascript">
+        $(function initialize() {
+            var myLatlng = new google.maps.LatLng( "@InteractiveConsultant.Models.Coords.Lat", "@InteractiveConsultant.Models.Coords.Lng");
+            var myOptions = {
+                zoom: 8,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            var point = new google.maps.LatLng("@InteractiveConsultant.Models.Coords.Lat", "@InteractiveConsultant.Models.Coords.Lng");
+            var marker = new google.maps.Marker({
+                position: point,
+                map: map
+            });
+        });
+    </script>
 </body>
 </html>

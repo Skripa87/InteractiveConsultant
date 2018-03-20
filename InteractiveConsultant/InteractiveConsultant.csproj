@@ -177,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\Coords.cs" />
     <Compile Include="Models\ExtendOfNeed.cs" />
     <Compile Include="Models\Income.cs" />
     <Compile Include="Models\InteractiveConsultantContext.cs" />
@@ -331,6 +332,7 @@
     <Content Include="Views\Interview\InostranecResult.cshtml" />
     <Content Include="Views\GeoLocation\ConsentToTheProcessingOfGeodata.cshtml" />
     <Content Include="Views\GeoLocation\ProcessingOfGeodata.cshtml" />
+    <Content Include="Views\GeoLocation\ControlProcessingOfGeodata.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

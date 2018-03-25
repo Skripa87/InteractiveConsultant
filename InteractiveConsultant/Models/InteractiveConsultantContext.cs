@@ -1,11 +1,11 @@
 namespace InteractiveConsultant.Models
 {
-    using System;
+    //using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
+    //using System.ComponentModel.DataAnnotations.Schema;
+    //using System.Linq;
 
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    /*[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]*/
     public class InteractiveConsultantContext : DbContext
     {
         public InteractiveConsultantContext()

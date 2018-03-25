@@ -10,10 +10,12 @@ namespace InteractiveConsultant.Controllers
     public class GeoLocationController : Controller
     {
         // GET: GeoLocation
-        public ActionResult ConsentToTheProcessingOfGeodata(bool _checked)
+        public ActionResult ConsentToTheProcessingOfGeodata(bool _checked, bool _voicerOn)
         {
-            if (_checked == false) return RedirectToAction("ErrorAgree", "Home");
-            return View();
+            StateInterview._checked = _checked;
+            StateInterview._voicerOn = _voicerOn;
+            if (StateInterview._checked == false) return RedirectToAction("ErrorAgree", "Home");
+            else return View();
         }
 
         public ActionResult ControlProcessingOfGeodata(string action)

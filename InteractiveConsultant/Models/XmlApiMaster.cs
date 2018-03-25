@@ -20,7 +20,7 @@ namespace InteractiveConsultant.Models
         }
 
         public Dictionary<string, string> GetLocationsName()
-        {
+         {
             try
             {
                 Dictionary<string, string> locations = new Dictionary<string, string>();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ using System.Speech.Synthesis;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace InteractiveConsultant.Controllers
 {
@@ -21,11 +23,11 @@ namespace InteractiveConsultant.Controllers
         static List<Answer> answers;
         static List<bool> checkQuestions;
         static List<bool> disabledQuestion;
-        static bool voicerON;
+        static bool voicerON = StateInterview._voicerOn;
         // GET: Interview
-        public ActionResult Index(bool _checked, bool _voicerON)
+        public ActionResult Index()
         {
-            voicerON = _voicerON;
+            bool _checked = StateInterview._checked;
             numberQuestion = 0;
             _countFamilyPeople = 0;
             answers = new List<Answer>();
@@ -94,10 +96,28 @@ namespace InteractiveConsultant.Controllers
                 else checkQuestions[answers.IndexOf(a)] = false;
             }
             ViewData["Cheker"] = checkQuestions;
-            Task task = new Task(() => {
+            /*Task task = new Task(() => {
                 SpeechSynthesizer spech = new SpeechSynthesizer();
                 spech.SetOutputToDefaultAudioDevice();
                 spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+            });*/
+            Task task = new Task(() =>
+            {
+            var namef = Server.MapPath("~/Content/") + "temp.mp3";
+                using (SpeechSynthesizer spech = new SpeechSynthesizer())
+                {
+                    var tempaudiofile = CreateTempDataProvider();
+                    if (!System.IO.File.Exists(namef))
+                    {
+                        System.IO.File.Delete(namef);
+                    }
+                    var file = System.IO.File.Create(namef);
+                    file.Close();
+                    spech.SetOutputToWaveFile(file.Name);
+                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
+                    file.Close();
+                    StateInterview.audio = "Content/" + "temp.mp3";
+                }                
             });
             Task taskIncome = new Task(() => {
                 SpeechSynthesizer spech = new SpeechSynthesizer();
@@ -107,7 +127,7 @@ namespace InteractiveConsultant.Controllers
             if (action.Equals("next"))
             {
                 numberQuestion++;
-                ViewData["numberQuestion"] = numberQuestion;
+                ViewData["numberQuestion"] = numberQuestion + 1;
                 if (numberQuestion < _questions.Count)
                 {
                     if (voicerON) task.Start();
@@ -119,7 +139,7 @@ namespace InteractiveConsultant.Controllers
             else if (action.Equals("previos"))
             {
                 numberQuestion--;
-                ViewData["numberQuestion"] = numberQuestion;
+                ViewData["numberQuestion"] = numberQuestion + 1;
                 if (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 if (voicerON) task.Start();
                 if(numberQuestion == 0) return RedirectToAction("StartInterview", new {_voicerON});
@@ -128,7 +148,7 @@ namespace InteractiveConsultant.Controllers
             else if (action.Contains("page"))
             {
                 numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 1));
-                ViewData["numberQuestion"] = numberQuestion;
+                ViewData["numberQuestion"] = numberQuestion + 1;
                 if (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
                 if (voicerON) task.Start();
                 if (numberQuestion == 0) return RedirectToAction("StartInterview", new {_voicerON});
@@ -163,8 +183,10 @@ namespace InteractiveConsultant.Controllers
 
                 if (income.GetResultSDDFamily())
                 {
-                    Answer answer = new Answer();
-                    answer.CostAnswer = 1000;
+                    Answer answer = new Answer
+                    {
+                        CostAnswer = 1000
+                    };
                     answers.Add(answer);
                 }
             }
@@ -176,8 +198,10 @@ namespace InteractiveConsultant.Controllers
 
                     if (income.GetResultSDDFamily())
                     {
-                        Answer answer = new Answer();
-                        answer.CostAnswer = 1000;
+                        Answer answer = new Answer
+                        {
+                            CostAnswer = 1000
+                        };
                         answers.Add(answer);
                     }
                 }

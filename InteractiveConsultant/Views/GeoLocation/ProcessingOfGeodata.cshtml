@@ -1,13 +1,25 @@
 ﻿@model InteractiveConsultant.Models.LocationUser
-<div class="container questions geolocation">
-    <div class="row qestion_set geolocation">
-        <div class="col-md-12 col-sm-12">
+<div class="container questions geolocation_map">
+    <div class="row qestion_set geolocation_map">
+        <div class="col-md-12 col-sm-12 answer_map">
             <h2>Ваше местоположение</h2>
         </div>
     </div>
-    <div class="row content_body geolocation">
-        <div class="col-md-12 col-sm-12 geolocation" onload="initialize()">
-            <div id="map_canvas" style="width:400px;height:400px;"></div>
+    <div class="row content_body geolocation_map">
+        <div class="col-md-7 col-sm-7 geolocation_map" onload="initialize()">
+            <div id="map_canvas" style="width:500px;height:500px;"></div>
+        </div>
+        <div class="col-md-5 col-sm-5">
+            <p>@Model.Country</p>
+            <p>@Model.District</p>
+            <p>@Model.Region</p>
+            <p>Город @Model.City</p>
+            <p>Правильно ли мы определили Ваше место проживания?</p>
+            @using (Html.BeginForm("Index", "Interview", FormMethod.Post))
+            {
+                <span><button name="action" class="btn btn-default map_question_yes" value="Yes">Да</button>
+                <button name="action" class="btn btn-default map_question_no" value="No">Нет</button></span>
+            }
         </div>
     </div>
 </div>

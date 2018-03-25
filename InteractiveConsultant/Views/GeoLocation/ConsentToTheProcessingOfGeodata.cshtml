@@ -1,17 +1,27 @@
-﻿<div class="container questions">
+﻿<div class="container geolocation questions">
+    <div class="row rules-header">
+        <div class="col-md-12 col-sm-12">
+            <h2 class="rules-header"> ИНТЕРАКТИВНЫЙ ОНЛАЙН-КОНСУЛЬТАНТ ПО СОЦИАЛЬНОМУ ОБСЛУЖИВАНИЮ НАСЕЛЕНИЯ</h2>
+        </div>
+    </div>
+    <div class="row rules-of-greeting">
+        <div class="col-md-12 col-sm-12">
+            <h3 class="rules-of-greeting">Уважаемый пользователь!</h3>
+        </div>
+    </div>
     <div class="row geolocation_processing">
         <div class="col-md-12 col-sm-12">
-            <p class="question">Для осуществления поиска Вашего местонахождения, нам необходимо получить Ваши геоданные. Нажмите на кнопку "Согласие" если согласны предоставить геоданные иначе нажмите "Отказ"</p>
+            <p class="question geolocation">Для предоставления информации о ближайших учреждениях социального обслуживания, нам необходимо получить информацию о Вашем местоположении! Нажмите Согласие, если согласны предоставить геоданные, иначе нажмите Отказ</p>
         </div>
     </div>
     @using (Html.BeginForm("ControlProcessingOfGeodata", "GeoLocation", FormMethod.Post))
     {
         <div class="row geolocation_body">
             <div class="col-md-6 col-sm-6">
-                <button name="action" class="btn btn-default" value="Yes">Согласие </button>
+                <button name="action" class="btn btn-default geolocation" value="Yes">Согласие </button>
             </div>
-            <div class="col-md-6 col-sm-6">
-                <button name="action" class="btn btn-default" value="No">Отказ</button>
+            <div class="col-md-6 col-sm-6 leftgeolocation">
+                <button name="action" class="btn btn-default geolocation" value="No">Отказ</button>
             </div>
         </div>
     }

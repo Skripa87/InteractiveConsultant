@@ -2,10 +2,8 @@
 @{int iter = 0;
     string namerad = "";
 }
-<audio autoplay>
-    <source src="@InteractiveConsultant.Models.StateInterview.audio" type="audio/mp3" autoplay="autoplay">
-</audio>
 <div class="container questions">
+    <embed src="~/Content/" width="0" height="0"/>
     <div class="row qestion_set">
         <div class="col-md-12 col-sm-12">
             <p class="question">@ViewData["numberQuestion"]. @Model.TextQuestion</p>
@@ -88,3 +86,4 @@
                         </div>
                                     }
 </div>
+<div id="sound_player"></div>

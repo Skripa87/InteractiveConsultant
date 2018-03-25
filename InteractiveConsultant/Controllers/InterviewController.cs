@@ -116,7 +116,7 @@ namespace InteractiveConsultant.Controllers
                     spech.SetOutputToWaveFile(file.Name);
                     spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
                     file.Close();
-                    StateInterview.audio = "Content/" + "temp.mp3";
+                    StateInterview.audio = namef.Replace('\\',' ');
                 }                
             });
             Task taskIncome = new Task(() => {

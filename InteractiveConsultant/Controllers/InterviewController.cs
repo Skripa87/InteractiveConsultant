@@ -44,16 +44,6 @@ namespace InteractiveConsultant.Controllers
                 checkQuestions.Add(false);
             }
             ViewData["Cheker"] = checkQuestions;
-            if (voicerON)
-            {
-                Task task = new Task(() =>
-                {
-                    SpeechSynthesizer spech = new SpeechSynthesizer();
-                    spech.SetOutputToDefaultAudioDevice();
-                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
-                });
-                task.Start();
-            }
             return View(_questions.FirstOrDefault());
         }
 
@@ -67,16 +57,6 @@ namespace InteractiveConsultant.Controllers
             }
             ViewData["Cheker"] = checkQuestions;
             if (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
-            if (voicerON)
-            {
-                Task task = new Task(() =>
-                {
-                    SpeechSynthesizer spech = new SpeechSynthesizer();
-                    spech.SetOutputToDefaultAudioDevice();
-                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
-                });
-                task.Start();
-            }
             return View(_questions.FirstOrDefault());
         }
 
@@ -96,44 +76,12 @@ namespace InteractiveConsultant.Controllers
                 else checkQuestions[answers.IndexOf(a)] = false;
             }
             ViewData["Cheker"] = checkQuestions;
-            /*Task task = new Task(() => {
-                SpeechSynthesizer spech = new SpeechSynthesizer();
-                spech.SetOutputToDefaultAudioDevice();
-                spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
-            });*/
-            Task task = new Task(() =>
-            {
-            var namef = Server.MapPath("~/Content/") + "temp.mp3";
-                using (SpeechSynthesizer spech = new SpeechSynthesizer())
-                {
-                    var tempaudiofile = CreateTempDataProvider();
-                    if (!System.IO.File.Exists(namef))
-                    {
-                        System.IO.File.Delete(namef);
-                    }
-                    var file = System.IO.File.Create(namef);
-                    file.Close();
-                    spech.SetOutputToWaveFile(file.Name);
-                    spech.Speak(_questions.ElementAt(numberQuestion).TextQuestion);
-                    file.Close();
-                    StateInterview.audio = namef.Replace('\\',' ');
-                }                
-            });
-            Task taskIncome = new Task(() => {
-                SpeechSynthesizer spech = new SpeechSynthesizer();
-                spech.SetOutputToDefaultAudioDevice();
-                spech.Speak("Для определения условий предоставления социального обслуживания в зависимости от средне-душевого дохода семьи, необходимо ввести количество совместно проживающих родственников");
-            });
             if (action.Equals("next"))
             {
                 numberQuestion++;
                 ViewData["numberQuestion"] = numberQuestion + 1;
-                if (numberQuestion < _questions.Count)
-                {
-                    if (voicerON) task.Start();
-                    if  (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
-                }
-                if (numberQuestion > _questions.Count - 1) { if (voicerON) taskIncome.Start(); return RedirectToAction("PreIncome", "Interview"); }
+                if (numberQuestion < _questions.Count) if  (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
+                if (numberQuestion > _questions.Count - 1) return RedirectToAction("PreIncome", "Interview");
                 else return View(_questions.ElementAt(numberQuestion));
             }
             else if (action.Equals("previos"))
@@ -141,7 +89,6 @@ namespace InteractiveConsultant.Controllers
                 numberQuestion--;
                 ViewData["numberQuestion"] = numberQuestion + 1;
                 if (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
-                if (voicerON) task.Start();
                 if(numberQuestion == 0) return RedirectToAction("StartInterview", new {_voicerON});
                 else return View(_questions.ElementAt(numberQuestion));                
             }
@@ -150,7 +97,6 @@ namespace InteractiveConsultant.Controllers
                 numberQuestion = Convert.ToInt32(action.Substring(action.IndexOf('_') + 1));
                 ViewData["numberQuestion"] = numberQuestion + 1;
                 if (answers[numberQuestion] != null) ViewData["AnswerID"] = answers[numberQuestion].IDAnswer;
-                if (voicerON) task.Start();
                 if (numberQuestion == 0) return RedirectToAction("StartInterview", new {_voicerON});
                 else return View(_questions.ElementAt(numberQuestion));
             }
@@ -213,16 +159,6 @@ namespace InteractiveConsultant.Controllers
                 _interview.Answers.Add(a);
             }
             Result result = ManagerInterview.GetResultInterview(_interview);
-            if (voicerON)
-            {
-                Task task = new Task(() =>
-                {
-                    SpeechSynthesizer spech = new SpeechSynthesizer();
-                    spech.SetOutputToDefaultAudioDevice();
-                    spech.Speak(_interview.TextResult);
-                });
-                task.Start();
-            }
             return View(_interview);
         }
         
@@ -233,16 +169,6 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult Income(string countPeople)
         {
-            if (voicerON)
-            {
-                Task task = new Task(() =>
-                {
-                    SpeechSynthesizer spech = new SpeechSynthesizer();
-                    spech.SetOutputToDefaultAudioDevice();
-                    spech.Speak("Для определения условий предоставления социального обслуживания в зависимости от средне-душевого дохода семьи, необходимо ввести среднюю зароботную плату за месяц для каждого члена семьи");
-                });
-                task.Start();
-            }
             try
             {
                 _countFamilyPeople = Convert.ToInt32(countPeople);

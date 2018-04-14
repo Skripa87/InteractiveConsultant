@@ -4,6 +4,11 @@
 }
 <div class="container questions">
     <div class="row qestion_set">
+        <script type="text/javascript">
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(@Model.TextQuestion);
+        synth.speak(utterThis);
+        </script>
         <div class="col-md-12 col-sm-12">
             <p class="question">1. @Model.TextQuestion</p>
         </div>

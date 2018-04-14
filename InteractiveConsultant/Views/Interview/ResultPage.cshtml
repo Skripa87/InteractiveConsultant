@@ -1,5 +1,10 @@
 ﻿@model InteractiveConsultant.Models.Interview
 <div class="container">
+    <script type="text/javascript">
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(@Model.TextResult);
+        synth.speak(utterThis);
+    </script>
     <div class="row">
         <div class="col-md-12 col-sm-12 body-content">
             <section id="rules-text">

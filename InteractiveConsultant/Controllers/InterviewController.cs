@@ -23,7 +23,6 @@ namespace InteractiveConsultant.Controllers
         static List<Answer> answers;
         static List<bool> checkQuestions;
         static List<bool> disabledQuestion;
-        static bool voicerON = StateInterview._voicerOn;
         // GET: Interview
         public ActionResult Index()
         {
@@ -49,7 +48,7 @@ namespace InteractiveConsultant.Controllers
 
         public ActionResult StartInterview(bool _voicerON)
         {
-            voicerON = _voicerON;
+            StateInterview._voicerOn = _voicerON;
             foreach (var a in answers)
             {
                 if (a != null) checkQuestions[answers.IndexOf(a)] = true;
@@ -63,7 +62,7 @@ namespace InteractiveConsultant.Controllers
         [HttpPost]
         public ActionResult PreNextQuestion(string action, string responses, bool _voicerON)
         {
-            voicerON = _voicerON;
+            StateInterview._voicerOn = _voicerON;
             if (responses != null)
             {
                 answers[numberQuestion] = _questions.ElementAt(numberQuestion).Answers.Where(a => a.IDAnswer.ToString().Equals(responses)).FirstOrDefault();

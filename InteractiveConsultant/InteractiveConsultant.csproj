@@ -191,7 +191,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Audio\temp.mp3" />
     <Content Include="Content\Image\bgque.png" />
     <Content Include="Content\Image\bgquestionsblock.png" />
     <Content Include="Content\Image\bottom.png" />

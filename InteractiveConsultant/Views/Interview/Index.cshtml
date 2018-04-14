@@ -4,11 +4,14 @@
 }
 <div class="container questions">
     <div class="row qestion_set">
-        <script type="text/javascript">
+        @if (InteractiveConsultant.Models.StateInterview._voicerOn)
+        {
+            <script type="text/javascript">
         var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance(@Model.TextQuestion);
+        var utterThis = new SpeechSynthesisUtterance("@Model.TextQuestion");
         synth.speak(utterThis);
-        </script>
+            </script>
+        }
         <div class="col-md-12 col-sm-12">
             <p class="question">1. @Model.TextQuestion</p>
         </div>
@@ -44,7 +47,7 @@
                             <input id="@namerad" class="qestion_set" type="radio" name="responses" value="@a.IDAnswer.ToString()" hidden />
                         </label>
                     }
-                </div>                
+                </div>
             </div>
                         iter++;
                     }
@@ -53,27 +56,27 @@
                             <button name="action" class="btn btn-default" value="next">Следующий вопрос</button>
                         </div>
                     </div>
-                        <div class="row navigation">
-                            <div class="col-md-12 col-sm-12">
-                                @{  int i = 0;
-                                    string val = "", cl = "";
-                                    foreach (var b in (List<bool>)ViewData["Cheker"])
+                    <div class="row navigation">
+                        <div class="col-md-12 col-sm-12">
+                            @{  int i = 0;
+                                string val = "", cl = "";
+                                foreach (var b in (List<bool>)ViewData["Cheker"])
+                                {
+                                    val = "page_" + i.ToString();
+                                    i++;
+                                    if (b == true)
                                     {
-                                        val = "page_" + i.ToString();
-                                        i++;
-                                        if (b == true)
-                                        {
-                                            cl = "green";
-                                        }
-                                        else
-                                        {
-                                            cl = "";
-                                        }
-                                        <button name="action" class="btn btn-default @cl" value=@val>@i</button>
+                                        cl = "green";
                                     }
+                                    else
+                                    {
+                                        cl = "";
+                                    }
+                                    <button name="action" class="btn btn-default @cl" value=@val>@i</button>
                                 }
-                            </div>
+                            }
                         </div>
+                    </div>
                         <div class="row voicer">
                             <div class="col-md-4 col-sm-4">
                                 <span class="voicerON"><img src="~/Content/Image/voicer.png" />@Html.CheckBox("_voicerON")  Вкл/Выкл голос</span>
@@ -85,5 +88,5 @@
                                 <button name="action" class="btn btn-default" value="endIncome">Внести доходы</button>
                             </div>
                         </div>
-                     }    
+                                }
 </div>

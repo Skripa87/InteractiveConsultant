@@ -517,3 +517,8 @@ p.question.geolocation {
 .col-md-7.col-sm-7.geolocation_map {
     padding-bottom: 7px;
 }
+
+.btn.btn-default.user_input_location {
+    margin-top:10px;
+    margin-bottom:10px;
+}

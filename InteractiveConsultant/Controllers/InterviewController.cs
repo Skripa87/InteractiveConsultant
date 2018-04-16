@@ -24,26 +24,34 @@ namespace InteractiveConsultant.Controllers
         static List<bool> checkQuestions;
         static List<bool> disabledQuestion;
         // GET: Interview
-        public ActionResult Index()
+        public ActionResult Index(string action, string address)
         {
-            bool _checked = StateInterview._checked;
-            numberQuestion = 0;
-            _countFamilyPeople = 0;
-            answers = new List<Answer>();
-            checkQuestions = new List<bool>();
-            disabledQuestion = new List<bool>();
-            _interview = new Interview();    // Создание экземпляра класса интервью для текущего пользователя
-            _questions = new List<Question>(); // Создание экземпляра класса List Вопросов
-            if (_checked == false) return RedirectToAction("ErrorAgree", "Home"); // Организовать переход к результату
-            ManagerInterview.Agreement = _checked; //Установка переменной "согласие на прохождение опроса" в положение выбранное пользователем
-            ManagerInterview.StartInterview(_questions, _interview); // инициализация всех переменных текущего опроса
-            foreach(var q in _questions)
+            if (action == "No")
             {
-                answers.Add(null);
-                checkQuestions.Add(false);
+                Coords.Lng = "";
+                Coords.Lat = "";
+                return RedirectToAction("UsersInputLocation", "GeoLocation");
             }
-            ViewData["Cheker"] = checkQuestions;
-            return View(_questions.FirstOrDefault());
+            else
+            {
+                numberQuestion = 0;
+                _countFamilyPeople = 0;
+                answers = new List<Answer>();
+                checkQuestions = new List<bool>();
+                disabledQuestion = new List<bool>();
+                _interview = new Interview();    // Создание экземпляра класса интервью для текущего пользователя
+                _questions = new List<Question>(); // Создание экземпляра класса List Вопросов
+                if (StateInterview._checked == false) return RedirectToAction("ErrorAgree", "Home"); // Организовать переход к результату
+                ManagerInterview.Agreement = StateInterview._checked; //Установка переменной "согласие на прохождение опроса" в положение выбранное пользователем
+                ManagerInterview.StartInterview(_questions, _interview); // инициализация всех переменных текущего опроса
+                foreach (var q in _questions)
+                {
+                    answers.Add(null);
+                    checkQuestions.Add(false);
+                }
+                ViewData["Cheker"] = checkQuestions;
+                return View(_questions.FirstOrDefault());
+            }            
         }
 
         public ActionResult StartInterview(bool _voicerON)

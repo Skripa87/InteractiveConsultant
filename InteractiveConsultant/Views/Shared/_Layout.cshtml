@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.12.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
     <title>Интерактивный консультант</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -215,5 +216,17 @@
             });
         });
     </script>    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.12.0/dist/js/jquery.suggestions.min.js"></script>
+    <script type="text/javascript">
+        $("#address").suggestions({
+            token: "4004c1e7cb9c2523dae8fc6a885bc74c140d3d90",
+            type: "ADDRESS",
+            count: 5,
+            onSelect: function (suggestion) {
+                console.log(suggestion);                
+            }
+        });
+    </script>
 </body>
 </html>

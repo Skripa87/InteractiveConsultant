@@ -1,4 +1,4 @@
-﻿@model InteractiveConsultant.Models.LocationUser
+﻿@using InteractiveConsultant.Models
 <div class="container questions geolocation_map">
     <div class="row qestion_set geolocation_map">
         <div class="col-md-12 col-sm-12 answer_map">
@@ -10,10 +10,10 @@
             <div id="map_canvas" style="width:500px;height:500px;"></div>
         </div>
         <div class="col-md-5 col-sm-5">
-            <p>@Model.Country</p>
-            <p>@Model.District</p>
-            <p>@Model.Region</p>
-            <p>Город @Model.City</p>
+            <p>@LocationUser.Country</p>
+            <p>@LocationUser.District</p>
+            <p>@LocationUser.Region</p>
+            <p>Город @LocationUser.City</p>
             <p>Правильно ли мы определили Ваше место проживания?</p>
             @using (Html.BeginForm("Index", "Interview", FormMethod.Post))
             {

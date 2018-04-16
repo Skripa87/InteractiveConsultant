@@ -5,12 +5,12 @@ using System.Web;
 
 namespace InteractiveConsultant.Models
 {
-    public class LocationUser
+    public static class LocationUser
     {
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Region { get; set; }
-        public string District { get; set; }
+        public static string Country { get; set; }
+        public static string City { get; set; }
+        public static string Region { get; set; }
+        public static string District { get; set; }
 
     }
 }

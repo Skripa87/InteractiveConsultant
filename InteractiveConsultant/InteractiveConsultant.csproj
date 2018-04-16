@@ -98,6 +98,13 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="suggestions-csharp">
+      <HintPath>..\packages\suggestions-csharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
@@ -114,6 +121,9 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -334,7 +344,7 @@
     <Content Include="Views\Interview\InostranecResult.cshtml" />
     <Content Include="Views\GeoLocation\ConsentToTheProcessingOfGeodata.cshtml" />
     <Content Include="Views\GeoLocation\ProcessingOfGeodata.cshtml" />
-    <Content Include="Views\GeoLocation\ControlProcessingOfGeodata.cshtml" />
+    <Content Include="Views\GeoLocation\UsersInputLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

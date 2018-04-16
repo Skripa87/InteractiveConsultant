@@ -1,0 +1,23 @@
+﻿<div class="container questions geolocation_map">
+    <div class="row qestion_set geolocation_map">
+        <div class="col-md-12 col-sm-12 answer_map">
+            <h2>Ваше местоположение</h2>
+        </div>
+    </div>
+    <div class="row content_body geolocation_map">
+        <div class="col-md-7 col-sm-7 geolocation_map" onload="initialize()">
+            <div id="map_canvas" style="width:500px;height:500px;"></div>
+        </div>
+        <div class="col-md-5 col-sm-5">
+            @using (Html.BeginForm("Index", "Interview", FormMethod.Post))
+            {
+                <p>Введите Ваше местоположение:</p>
+                <input id="address" name="address" type="text" size="100" />
+                <span>
+                    <button name="action" class="btn btn-default user_input_location" value="Yes">Продолжить</button>
+                </span>
+                <p>Необходимо ввести наименование населенного пункта в котором Вы проживаете. Нам не нужен точный адрес Вашего проживания.</p>
+            }
+        </div>
+    </div>
+</div>

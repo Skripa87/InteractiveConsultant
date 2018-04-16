@@ -9,6 +9,6 @@ namespace InteractiveConsultant.Models
     {
         public static bool _voicerOn { get; set; }
         public static bool _checked { get; set; }
-        public static string audio { get; set; }
+        public static bool _agreeToTheLocation { get; set; }
     }
 }

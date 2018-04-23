@@ -11,11 +11,11 @@ namespace InteractiveConsultant.Models
     public class XmlApiMaster
     {
         private string _ipUser;
-        private string urlService = "http://ipgeobase.ru:7020/geo?ip=109.187.205.68";
+        private string urlService = "http://ipgeobase.ru:7020/geo?ip=";
 
         public XmlApiMaster(HttpContextBase httpContext)
         {
-            _ipUser = "";//httpContext.Request.UserHostAddress;
+            _ipUser = httpContext.Request.UserHostAddress;
             urlService += _ipUser;
         }
 

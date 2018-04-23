@@ -9,6 +9,7 @@ namespace InteractiveConsultant.Models
     {
         static ICollection<ExtendOfNeed> tableBartelLouten;
         static InteractiveConsultantContext context;
+        static List<CentralOrganisation> centralOrganisations;
         static public bool Agreement { get; set; }
         static ManagerInterview()
         {
@@ -38,7 +39,7 @@ namespace InteractiveConsultant.Models
         static public void StartInterview(ICollection<Question> questions, Interview interview)
         {
             tableBartelLouten = new List<ExtendOfNeed>();
-
+            centralOrganisations = new List<CentralOrganisation>();
             if (Agreement)
             {
                 foreach (var q in context.Questions)
@@ -48,6 +49,10 @@ namespace InteractiveConsultant.Models
                 foreach (var e in context.TableBartelLouton)
                 {
                     tableBartelLouten.Add(e);
+                }
+                foreach (var o in context.CentralOrganisations)
+                {
+                    centralOrganisations.Add(o);
                 }
             }             
         }

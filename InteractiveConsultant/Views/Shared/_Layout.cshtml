@@ -215,7 +215,7 @@
                 map: map
             });
         });
-    </script>    
+    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.12.0/dist/js/jquery.suggestions.min.js"></script>
     <script type="text/javascript">
@@ -224,7 +224,26 @@
             type: "ADDRESS",
             count: 5,
             onSelect: function (suggestion) {
-                console.log(suggestion);                
+                console.log(suggestion);
+                $("#bufer1").val(suggestion.data.country);
+                $("#bufer2").val(suggestion.data.region);
+                $("#bufer3").val(suggestion.data.area);
+                $("#bufer4").val(suggestion.data.city);
+                $(function initialize() {
+                    var myLatlng = new google.maps.LatLng(suggestion.data.geo_lat, suggestion.data.geo_lon);
+                    var myOptions = {
+                        zoom: 8,
+                        center: myLatlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                    var point = new google.maps.LatLng(suggestion.data.geo_lat, suggestion.data.geo_lon);
+                    var marker = new google.maps.Marker({
+                        position: point,
+                        map: map
+                    });                    
+                });
+
             }
         });
     </script>

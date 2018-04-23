@@ -24,7 +24,7 @@ namespace InteractiveConsultant.Controllers
         static List<bool> checkQuestions;
         static List<bool> disabledQuestion;
         // GET: Interview
-        public ActionResult Index(string action, string address)
+        public ActionResult Index(string action, string address, List<string> bufer)
         {
             if (action == "No")
             {

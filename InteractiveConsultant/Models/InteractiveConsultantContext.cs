@@ -22,11 +22,18 @@ namespace InteractiveConsultant.Models
                                             .WithMany(a => a.Interviews)
                                             .Map(m => m.MapLeftKey("IDAnswer").MapRightKey("IDInterview").ToTable("InterviewsAnswers"));
             modelBuilder.Entity<Question>().HasKey(q => q.IDQuestion);
+            modelBuilder.Entity<Area>().HasKey(a => a.IDArea);
+            modelBuilder.Entity<CentralOrganisation>().HasKey(c => c.IDOrganisation).HasMany(a=>a.Areas);
+            modelBuilder.Entity<CentralOrganisation>().HasKey(c => c.IDOrganisation).HasMany(i=>i.Organisations);
+            modelBuilder.Entity<InerOrganisation>().HasKey(i => i.IDOrganisation);
         }
 
         public DbSet<Answer> Answers { get; set; }
         public DbSet<ExtendOfNeed> TableBartelLouton { get; set; }
         public DbSet<Interview> Interviews { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<CentralOrganisation> CentralOrganisations { get; set; }
+        public DbSet<InerOrganisation> InerOrganisations { get; set; }
     }
 }

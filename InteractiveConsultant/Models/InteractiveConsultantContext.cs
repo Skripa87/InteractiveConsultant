@@ -26,6 +26,11 @@ namespace InteractiveConsultant.Models
             modelBuilder.Entity<CentralOrganisation>().HasKey(c => c.IDOrganisation).HasMany(a=>a.Areas);
             modelBuilder.Entity<CentralOrganisation>().HasKey(c => c.IDOrganisation).HasMany(i=>i.Organisations);
             modelBuilder.Entity<InerOrganisation>().HasKey(i => i.IDOrganisation);
+            modelBuilder.Entity<SocialForm>().HasKey(s => s.IDSocialForm);
+            modelBuilder.Entity<InerOrganisation>().HasKey(i => i.IDOrganisation)
+                                                   .HasMany(s => s.SocialForms)
+                                                   .WithMany(s => s.InerOrganisations)
+                                                   .Map(m => m.MapLeftKey("InerOrganisation_IDOrganisation").MapRightKey("SocialForm_IDSocialForm").ToTable("InerOrganisation_SocialForm"));
         }
 
         public DbSet<Answer> Answers { get; set; }
@@ -35,5 +40,6 @@ namespace InteractiveConsultant.Models
         public DbSet<Area> Areas { get; set; }
         public DbSet<CentralOrganisation> CentralOrganisations { get; set; }
         public DbSet<InerOrganisation> InerOrganisations { get; set; }
+        public DbSet<SocialForm> SocialForms { get; set; }
     }
 }

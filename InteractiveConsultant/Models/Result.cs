@@ -11,8 +11,21 @@ namespace InteractiveConsultant.Models
 
         public string TextResult { get; }
         
-        public Result(int extendOfNeed)
+        public Result(int extendOfNeed, ICollection<CentralOrganisation> centrs)
         {
+            CentralOrganisation centr = new CentralOrganisation(); 
+            bool mark = false;
+            if (StateInterview._agreeToTheLocation != false)
+            {
+                foreach (var c in centrs)
+                {
+                    foreach (var a in c.Areas)
+                    {
+                        if (a.NameArea.Contains(LocationUser.Area)) { mark = true; break; }
+                    }
+                    if (mark) { centr = c; break; }
+                }
+            }
             if (extendOfNeed == 1)
             {
                 this.TextResult = "Я рекомендую Вам, обратится в специализированное, стационарное учреждение социального обслуживания населения. Стоимость обслуживания в Вашем случае составит: 70% от от Вашего средне-душевого дохода.";

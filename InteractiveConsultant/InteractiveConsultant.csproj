@@ -98,6 +98,14 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="suggestions-csharp, Version=1.0.6669.30559, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\suggestions-csharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
@@ -193,6 +201,7 @@
     <Compile Include="Models\ManagerInterview.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\SocialForm.cs" />
     <Compile Include="Models\StateInterview.cs" />
     <Compile Include="Models\XmlApiMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

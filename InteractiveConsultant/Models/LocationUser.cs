@@ -11,6 +11,7 @@ namespace InteractiveConsultant.Models
         public static string City { get; set; }
         public static string Region { get; set; }
         public static string District { get; set; }
+        public static string Area { get; set; }
         
     }
 }

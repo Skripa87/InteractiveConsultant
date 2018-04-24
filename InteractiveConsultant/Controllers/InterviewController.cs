@@ -1,15 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using InteractiveConsultant.Models;
-using System.Speech.Synthesis;
-using System.Threading.Tasks;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
+using suggestionscsharp;
 
 namespace InteractiveConsultant.Controllers
 {
@@ -50,6 +44,24 @@ namespace InteractiveConsultant.Controllers
                     checkQuestions.Add(false);
                 }
                 ViewData["Cheker"] = checkQuestions;
+                if(bufer!=null)
+                {
+                    LocationUser.Country = bufer[0];
+                    LocationUser.Region = bufer[1];
+                    if (bufer[2] == "") { LocationUser.Area = bufer[3]; }
+                    else LocationUser.Area = bufer[2];
+                    LocationUser.City = bufer[3];
+                }
+                else
+                {
+                    var token = "4004c1e7cb9c2523dae8fc6a885bc74c140d3d90";
+                    var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs";
+                    var api = new SuggestClient(token, url);
+                    var query = LocationUser.Country +" г. "+LocationUser.City;
+                    var response = api.QueryAddress(query);
+                    if (response.suggestions[0].data.area != null) { LocationUser.Area = response.suggestions[0].data.area; }
+                    else LocationUser.Area = LocationUser.City;
+                }
                 return View(_questions.FirstOrDefault());
             }            
         }

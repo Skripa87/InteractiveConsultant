@@ -13,6 +13,6 @@ namespace InteractiveConsultant.Models
         {
             Organisations = new List<InerOrganisation>();
             Areas = new List<Area>();
-        }        
+        }       
     }
 }

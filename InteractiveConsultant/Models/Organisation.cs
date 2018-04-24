@@ -11,5 +11,9 @@ namespace InteractiveConsultant.Models
         public string NameOrganisation { get; set; }
         public string PropertysOrganisation { get; set; }
 
+        public Organisation()
+        {
+
+        }
     }
 }

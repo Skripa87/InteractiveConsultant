@@ -7,10 +7,10 @@ namespace InteractiveConsultant.Models
 {
     public class InerOrganisation:Organisation
     {
-        //public List<string> SocialForms;
+        public virtual ICollection<SocialForm> SocialForms { get; set; }
         public InerOrganisation()
         {
-            //SocialForms = new List<string>();
+            SocialForms = new List<SocialForm>();
         }
     }
 }

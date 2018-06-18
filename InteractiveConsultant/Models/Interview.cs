@@ -9,7 +9,7 @@ namespace InteractiveConsultant.Models
     {
         public byte IDInterview { get; set; }
         public DateTime DateInterview { get; set; }
-        public string TextResult { get; set; }
+        public Result Result { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
         public Interview()
         {

@@ -15,7 +15,7 @@ namespace InteractiveConsultant.Models
 
         public XmlApiMaster(HttpContextBase httpContext)
         {
-            _ipUser = "83.174.204.77";//httpContext.Request.UserHostAddress;
+            _ipUser = httpContext.Request.UserHostAddress;
             urlService += _ipUser;
         }
 

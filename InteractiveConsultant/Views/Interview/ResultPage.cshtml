@@ -4,7 +4,7 @@
     {
         <script type="text/javascript">
         var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance("@Model.TextResult");
+        var utterThis = new SpeechSynthesisUtterance("@Model.Result.TextResult");
         synth.speak(utterThis);
         </script>
     }
@@ -19,7 +19,18 @@
                 </div>
                 <div class="rules">
                     <p class="rules">По результату проведенного опроса и выбранных Вами ответов:</p>
-                    <p class="rules">@Model.TextResult</p>
+                    <p class="rules">@Model.Result.TextResult</p>
+                    @if(InteractiveConsultant.Models.StateInterview._agreeToTheLocation)
+                    {
+                        <p class="rules">Вы можете обратится в учреждения социального обслуживания: </p>
+                        <p class="rules">Центр социального обслуживания в вашем районе:" @Model.Result.CentrName</p>
+                        <p class="rules">Расположенный:@Model.Result.CentrAddress</p>
+                        foreach(var o in Model.Result.OrganisationsInfo)
+                        {
+                            <p class="rules"> - @o.Key</p>
+                            <p class="rules"> находится: - @o.Value</p>
+                        }
+                    }
                 </div>
             </section>
         </div>

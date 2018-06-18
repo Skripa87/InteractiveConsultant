@@ -7,7 +7,7 @@ namespace InteractiveConsultant.Models
 {
     public abstract class Organisation
     {
-        public byte IDOrganisation { get; set; }        
+        public int IDOrganisation { get; set; }        
         public string NameOrganisation { get; set; }
         public string PropertysOrganisation { get; set; }
 

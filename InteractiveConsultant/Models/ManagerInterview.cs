@@ -62,7 +62,7 @@ namespace InteractiveConsultant.Models
             int extendOfNeed = 0;
             extendOfNeed = GetExtendOfNeed(interview);
             Result result = new Result(extendOfNeed, centralOrganisations);
-            interview.TextResult = result.TextResult;
+            interview.Result = result;
             return result;
         }
     }

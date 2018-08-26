@@ -7,7 +7,12 @@ namespace InteractiveConsultant.Models
 {
     public class Area
     {
-        public byte IDArea { get; set; }
-        public string NameArea { get; set; }       
+        public int IDArea { get; set; }
+        public string NameArea { get; set; }
+        public virtual List<CentralOrganisation> CentralOrganizations {get;set;}
+        public Area()
+        {
+            CentralOrganizations = new List<CentralOrganisation>();
+        }
     }
 }

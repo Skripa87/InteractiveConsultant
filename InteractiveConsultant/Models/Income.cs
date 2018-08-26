@@ -42,7 +42,7 @@ namespace InteractiveConsultant.Models
         public bool GetResultSDDFamily()
         {
             if (FamilyPeopleCount == 0) return false;
-            else return ((((1.0 / 3.0) * Revenue.Sum()) / FamilyPeopleCount) < PVSDD);
+            else return (((Revenue.Sum()) / FamilyPeopleCount) < PVSDD);
         }
     }
 }

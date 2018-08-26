@@ -1,49 +1,83 @@
-﻿@model InteractiveConsultant.Models.Interview
-<div class="container">
-    @if (InteractiveConsultant.Models.StateInterview._voicerOn)
-    {
-        <script type="text/javascript">
-        var synth = window.speechSynthesis;
-        var utterThis = new SpeechSynthesisUtterance("@Model.Result.TextResult");
-        synth.speak(utterThis);
-        </script>
-    }
+﻿@model InteractiveConsultant.Models.Result
+<div class="container result-page">
     <div class="row">
-        <div class="col-md-12 col-sm-12 body-content">
-            <section id="rules-text">
-                <div class="rules-header">
-                    <h2 class="rules-header"> ИНТЕРАКТИВНЫЙ ОНЛАЙН-КОНСУЛЬТАНТ ПО СОЦИАЛЬНОМУ ОБСЛУЖИВАНИЮ НАСЕЛЕНИЯ</h2>
-                </div>
-                <div class="rules-of-greeting">
-                    <h3 class="rules-of-greeting">Уважаемый пользователь!</h3>
-                </div>
-                <div class="rules">
-                    <p class="rules">По результату проведенного опроса и выбранных Вами ответов:</p>
-                    <p class="rules">@Model.Result.TextResult</p>
-                    @if(InteractiveConsultant.Models.StateInterview._agreeToTheLocation)
-                    {
-                        <p class="rules">Вы можете обратится в учреждения социального обслуживания: </p>
-                        <p class="rules">Центр социального обслуживания в вашем районе:" @Model.Result.CentrName</p>
-                        <p class="rules">Расположенный:@Model.Result.CentrAddress</p>
-                        foreach(var o in Model.Result.OrganisationsInfo)
-                        {
-                            <p class="rules"> - @o.Key</p>
-                            <p class="rules"> находится: - @o.Value</p>
-                        }
-                    }
-                </div>
-            </section>
+        <div class="col-md-12">
+            <h3>Уфажаемый пользователь!</h3>
         </div>
     </div>
-    @using (Html.BeginForm("ErrorCompliteUser", "Home"))
-            {
-        <div class="row get_answer">
-            <div class="col-md-6 col-sm-6">
-                <button name="action" class="btn btn-default" value="start">Повторить</button>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <button name="action" class="btn btn-default" value="mintrud">Перейти на сайт Минтруда</button>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>По результату проведенного опроса и выбранных Вами ответов:</p>
         </div>
+    </div>
+    @if (Model.Conditions.Count > 0)
+    {
+        foreach (var item in Model.Conditions)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Рекомендовано: @(item?.SocialForm?.TextForView == null ? "" : item?.SocialForm?.TextForView) </p>
+                </div>
+            </div>
+        }
     }
+    <div class="row">
+        <div class="col-md-12">
+            <p>Предлагаем Вам обратится с заявлением о предоставлении социальных услуг в организацию, уполномоченную на признание граждан, нуждающимися в социальных услугах и оформление ИППСУ(индивидуальная программа предоставления социальных услуг):</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Организация уполномоченная на признание граждан нуждающимися в социальном обслуживание @(Model?.Centr?.NameOrganisation == null ? "" : Model?.Centr?.NameOrganisation), адрес: @(Model?.Centr?.PropertysOrganisation == null ? "" : Model?.Centr?.PropertysOrganisation) </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.Conditions.FindAll(o => o.OrganizationsPrz.Count > 0).Count > 0)
+            {
+                <h3 class="prz">По району проживания, Вы можете обратится:</h3>
+            }
+            @if (Model.Conditions.Count > 0)
+            {
+                foreach (var item in Model.Conditions)
+                {
+                    <p>@(item.SocialForm.IDSocialForm != 5 ? "Для " + item.SocialForm.TextForView.Replace("Предоставление","получения") : item.SocialForm.TextForView + "в:")</p>
+                    if (item.OrganizationsPrz.Count > 0)
+                    {
+                        foreach (var xitem in item.OrganizationsPrz)
+                        {
+                            <p>  - @xitem.NameOrganisation, адрес: @xitem.PropertysOrganisation; </p>
+                        }
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.Conditions.Count > 0)
+            {
+                foreach (var item in Model.Conditions)
+                {
+                    string countSupport = "";
+                    if (item.SupportOrganizations.Count > 1)
+                    {
+                        countSupport = "поставщикам";
+                    }
+                    else
+                    {
+                        countSupport = "поставщику";
+                    }
+                    <h3 class="prz">Для @(item.SocialForm.IDSocialForm != 5 ? item.SocialForm.TextForView.Replace("Предоставление","получения") + ". Вы можете обратится к " + countSupport + " социальных услуг:" : item.SocialForm.TextForView + "в организациях:")</h3>
+                    if (item.SupportOrganizations.Count > 0)
+                    {
+                        foreach (var xitem in item.SupportOrganizations)
+                        {
+                            <p>  - @xitem.NameOrganisation, адрес: @xitem.PropertysOrganisation; </p>
+                        }
+            }
+                }                
+            }
+        </div>
+    </div>
 </div>

@@ -10,5 +10,10 @@ namespace InteractiveConsultant.Models
         public static bool _voicerOn { get; set; }
         public static bool _checked { get; set; }
         public static bool _agreeToTheLocation { get; set; }
+        public static List<Recomendation> Recomendations { get; set; }
+        static StateInterview()
+        {
+            Recomendations = new List<Recomendation>();            
+        }
     }
 }

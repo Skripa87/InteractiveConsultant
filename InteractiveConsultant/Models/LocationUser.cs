@@ -12,6 +12,7 @@ namespace InteractiveConsultant.Models
         public static string Region { get; set; }
         public static string District { get; set; }
         public static string Area { get; set; }
-        
+        public static bool IsChilde { get; set; }
+        public static string TargetingGender { get; set; }        
     }
 }

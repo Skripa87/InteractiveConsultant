@@ -5,17 +5,13 @@ using System.Web;
 
 namespace InteractiveConsultant.Models
 {
-    public abstract class Organisation
+    public class ViewOrganisation
     {
-        public int IDOrganisation { get; set; }        
+        public int IDOrganisation { get; set; }
         public string NameOrganisation { get; set; }
         public string PropertysOrganisation { get; set; }
         public bool? IsCanPrz { get; set; }
         public bool? IsChilde { get; set; }
         public string TargetingGender { get; set; }
-        public Organisation()
-        {
-
-        }
     }
 }

@@ -35,7 +35,7 @@
                     }
                 </div>
                 <div class="col-md-1 col-sm-1 cheker">
-                    @if ((ViewData["AnswerID"] != null) && ((byte)ViewData["AnswerID"] == (byte)a.IDAnswer))
+                    @if ((ViewData["AnswerID"] != null) && ((int)ViewData["AnswerID"] == a.IDAnswer))
                     {
                         <label class="checked swing" for="@namerad">
                             <input id="@namerad" class="qestion_set" type="radio" name="responses" value="@a.IDAnswer.ToString()" checked hidden />

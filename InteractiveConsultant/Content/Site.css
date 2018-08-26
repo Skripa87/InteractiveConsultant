@@ -522,3 +522,10 @@ p.question.geolocation {
     margin-top:10px;
     margin-bottom:10px;
 }
+.container.result-page {
+    FONT-SIZE: 15px;
+    font-family: sans-serif;
+}
+h3.prz {
+    font-size: 18px;
+}

@@ -5,14 +5,19 @@ using System.Threading.Tasks;
 
 namespace InteractiveConsultant.Models
 {
-    public class Question // объект вопрос
+    public class Question : IComparable// объект вопрос
     {
-        public byte IDQuestion { get; set; }
+        public int IDQuestion { get; set; }
         public string TextQuestion { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
         public Question()
         {
             ICollection<Answer> Answers = new List<Answer>();
+        }
+
+        public int CompareTo(object obj)
+        {
+            return IDQuestion.CompareTo(((Question)obj).IDQuestion);
         }
     }
 }

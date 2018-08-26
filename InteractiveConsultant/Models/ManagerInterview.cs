@@ -29,15 +29,15 @@ namespace InteractiveConsultant.Models
             }
             return sumScore;
         }
-        static private int GetExtendOfNeed(Interview interview, out int scr)
+        static private ExtendOfNeed GetExtendOfNeed(Interview interview, out int scr)
         {
             int score = 0;
-            int extendOfNeed = 0;
+            ExtendOfNeed extendOfNeed = null;
             score = CalculateScores(interview);
             scr = score;
             foreach(var t in tableBartelLouten)
             {
-                if ((score <= t.MaxScore) && (score >= t.MinScore)) extendOfNeed = t.PowerExtendOfNeed;
+                if ((score <= t.MaxScore) && (score >= t.MinScore)) extendOfNeed = t;
             }
             return extendOfNeed;
         }
@@ -85,7 +85,8 @@ namespace InteractiveConsultant.Models
 
         static public Result GetResultInterview(Interview interview, out int scorePointTest)
         {
-            int extendOfNeed = 0, score = 0;
+            ExtendOfNeed extendOfNeed = null;
+            int score = 0;
             extendOfNeed = GetExtendOfNeed(interview, out score);
             scorePointTest = score;
             Result result = new Result(extendOfNeed, centralOrganisations, areas, socialForms,interview.Answers,recomendations);

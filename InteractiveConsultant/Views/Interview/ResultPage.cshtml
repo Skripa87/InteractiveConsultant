@@ -1,4 +1,7 @@
 ﻿@model InteractiveConsultant.Models.Result
+@{ 
+    List<InteractiveConsultant.Models.ViewOrganisation> writed = new List<InteractiveConsultant.Models.ViewOrganisation>();
+}
 <div class="container result-page">
     <div class="row">
         <div class="col-md-12">
@@ -35,18 +38,25 @@
         <div class="col-md-12">
             @if (Model.Conditions.FindAll(o => o.OrganizationsPrz.Count > 0).Count > 0)
             {
-                <h3 class="prz">По району проживания, Вы можете обратится:</h3>
+                <h3 class="prz">По району проживания, Вы можете обратится в ближайшее отделение:</h3>
             }
             @if (Model.Conditions.Count > 0)
             {
                 foreach (var item in Model.Conditions)
                 {
-                    <p>@(item.SocialForm.IDSocialForm != 5 ? "Для " + item.SocialForm.TextForView.Replace("Предоставление","получения") : item.SocialForm.TextForView + "в:")</p>
                     if (item.OrganizationsPrz.Count > 0)
                     {
                         foreach (var xitem in item.OrganizationsPrz)
                         {
-                            <p>  - @xitem.NameOrganisation, адрес: @xitem.PropertysOrganisation; </p>
+                            if (!writed.Select(s => s.IDOrganisation).Contains(xitem.IDOrganisation))
+                            {
+                                writed.Add(xitem);
+                                <p>  - @xitem.NameOrganisation, адрес: @xitem.PropertysOrganisation; </p>
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
                     }
                 }

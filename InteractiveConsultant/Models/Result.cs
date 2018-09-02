@@ -16,19 +16,38 @@ namespace InteractiveConsultant.Models
             centrs = new List<CentralOrganisation>();
             var recomendations = _recomendations.Where(r => answers.Select(s => s?.Recomendation_ID).Contains(r.ID)).ToList();
             Conditions = new List<Condition>();
-            var address = LocationUser.Area == null ? "" : LocationUser.Area + " район " + LocationUser.City == null ? "" : "г. " + LocationUser.City;
-            var alterAddress = LocationUser.Area == null ? "" : LocationUser.Area + " район " + LocationUser.City == null ? "" : "г." + LocationUser.City;
+            var address = (LocationUser.Area.Trim().ToLower() != LocationUser.City.Trim().ToLower()) ?
+                          ((LocationUser.Area == null || LocationUser.Area  == "") ? "" : LocationUser.Area + " район ") + 
+                          ((LocationUser.City == null || LocationUser.City == "") ? "" : ("г. " + LocationUser.City)):
+                          ((LocationUser.Area == null || LocationUser.Area == "") ? ("г. " + LocationUser.City) : LocationUser.Area);
+            var alterAddress = (LocationUser.Area.Trim().ToLower() != LocationUser.City.Trim().ToLower()) ?
+                               ((LocationUser.Area == null || LocationUser.Area == "") ? "" : LocationUser.Area + " район ") + 
+                               ((LocationUser.City == null || LocationUser.City == "") ? "" : ("г." + LocationUser.City)):
+                               ((LocationUser.Area == null || LocationUser.Area == "") ? ("г. " + LocationUser.City) : LocationUser.Area); ;
             address = address.Trim().ToLower();
             alterAddress = alterAddress.Trim().ToLower();
-            var area = _areas.Where(a => a.NameArea.Trim().ToLower().Contains(LocationUser.Area.Trim().ToLower())).ToList();
-            centrs = _centrs.Where(c => c.Areas.Select(a => a.IDArea).ToList()
-                                    .Intersect(area.Select(s => s.IDArea).ToList())
-                                .ToList()
-                                .Count > 0)
-                                .ToList();
-            Centr = centrs.Where(c => c.IsCentr == true).FirstOrDefault();
-            var centrPrz = centrs.Where(c => c.IsCanPrz == true).ToList();
-            GetCondition(extendOfNeed, _socialForms, recomendations, address, alterAddress, centrPrz);
+            Area area = null;
+            if (_areas.Where(a => a.NameArea.Trim().ToLower().Contains(LocationUser.Area.Trim().ToLower())).ToList().Count == 0)
+            {
+                StateInterview._agreeToTheLocation = false;
+            }
+            else if(_areas.Where(a => a.NameArea.Trim().ToLower().Contains(LocationUser.Area.Trim().ToLower())).ToList().Count > 0)
+            {
+                area = _areas.Where(a => a.NameArea.Trim().ToLower().Contains(LocationUser.Area.Trim().ToLower())).ToList().First();
+            }
+            centrs = area.CentralOrganizations;
+            Centr = (LocationUser.City.Trim().ToLower() == "уфа") ? (centrs.Where(c => c.IDOrganisation == 256).Count() > 0 ?
+                                                                     centrs.Where(c => c.IDOrganisation == 256).FirstOrDefault() :
+                                                                     (centrs.Where(c => c.IsCanPrz == true).Count() > 0 ?
+                                                                      centrs.Where(c => c.IsCanPrz == true).FirstOrDefault() :
+                                                                      _centrs.Where(c => c.IDOrganisation == 256).FirstOrDefault())) :
+                                                                      (centrs.Where(c => c.IsCanPrz == true).Count() > 0 ?
+                                                                      centrs.Where(c => c.IsCanPrz == true).FirstOrDefault() :
+                                                                      _centrs.Where(c => c.IDOrganisation == 256).FirstOrDefault());
+            var organisationsPrz = Centr.InerOrganisations.Where(i => i.IsCanPrz == true).Count() > 0 ?
+                                   Centr.InerOrganisations.Where(i => i.IsCanPrz == true).ToList() :
+                                   new List<InerOrganisation>() { };
+            GetCondition(Conditions, extendOfNeed.SocialForm, extendOfNeed.ConditionPay, area, _socialForms, recomendations, address, alterAddress, organisationsPrz);
         }
 
         private void ConvertToViewOrg<T>(List<T> inOrganisations, List<ViewOrganisation> outOrganisations, List<CentralOrganisation> centrals)
@@ -42,7 +61,10 @@ namespace InteractiveConsultant.Models
                 {
                     outOrganisation.NameOrganisation = centrals.Where(c => c.InerOrganisations.Select(s => s.IDOrganisation).Contains(((InerOrganisation)(dynamic)o).IDOrganisation))?.FirstOrDefault()?.NameOrganisation + ": " + ((dynamic)o).NameOrganisation;
                 }
-                outOrganisation.NameOrganisation = outOrganisation.NameOrganisation == null ? ((dynamic)o).NameOrganisation : outOrganisation.NameOrganisation;
+                else
+                {
+                    outOrganisation.NameOrganisation = ((dynamic)o).NameOrganisation;
+                }
                 outOrganisation.IDOrganisation = ((dynamic)o).IDOrganisation;
                 outOrganisation.IsCanPrz = ((dynamic)o).IsCanPrz;
                 outOrganisation.IsChilde = ((dynamic)o).IsChilde;
@@ -52,83 +74,57 @@ namespace InteractiveConsultant.Models
             }
         }
 
-        private void GetCondition(ExtendOfNeed extendOfNeed, ICollection<SocialForm> _socialForms, ICollection<Recomendation> Recomendations, string address, string alterAddress, List<CentralOrganisation> startOrgPrz)
+        private void GetCondition(List<Condition> conditions, SocialForm eSocialForm, bool? eConditionPay, Area area, ICollection<SocialForm> _socialForms, 
+                                  ICollection<Recomendation> Recomendations, string address, string alterAddress, List<InerOrganisation> startOrgPrz)
         {
-            var socialForm = extendOfNeed == null ? _socialForms.Where(s => s.IDSocialForm == 3).FirstOrDefault() : extendOfNeed.SocialForm;
-            var conditionPay = extendOfNeed == null ? false : extendOfNeed.ConditionPay;
-            var orgs = socialForm?.InerOrganisations?
-                                  .Where(org => org.IsCanPrz == true).ToList();
+            var socialForm = eSocialForm;
+            var conditionPay = eConditionPay;
+            var orgs = startOrgPrz;
             orgs.RemoveAll(r => !(r.IsChilde == LocationUser.IsChilde || r.IsChilde == null));
+            if (orgs.Count == 0) { orgs = startOrgPrz; }
             if (socialForm.IDSocialForm != 1)
             {
                 orgs.RemoveAll(r => !(r.PropertysOrganisation.ToLower().Trim().Contains(address) || r.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)));
             }
-            var _buff = startOrgPrz.Where(s => s.PropertysOrganisation.ToLower().Trim().Contains(address) ||
-                                               s.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)).ToList();
-            var buff = _buff.Where(b => b.InerOrganisations
-                            .Where(i => i.SocialForms.Select(sf => sf.IDSocialForm)
-                            .Contains(socialForm.IDSocialForm))
-                            .ToList().Count > 0).ToList();
             var viewOrgsPrz = new List<ViewOrganisation>();
-            ConvertToViewOrg(buff, viewOrgsPrz,centrs);
-            var _viewOrgsPrz = new List<ViewOrganisation>();
-            ConvertToViewOrg(orgs, _viewOrgsPrz, centrs);
-            viewOrgsPrz.AddRange(_viewOrgsPrz);
-            orgs = socialForm?.InerOrganisations?.Where(org => org.PropertysOrganisation.ToLower().Trim().Contains(address) || org.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)).ToList();
-            orgs.RemoveAll(org => !(org.TargetingGender == LocationUser.TargetingGender || org.TargetingGender.Trim() == "0"));
+            ConvertToViewOrg(orgs, viewOrgsPrz,centrs);            
+            if (socialForm.IDSocialForm != 1)
+            {
+                orgs = socialForm?.InerOrganisations?.Where(org => org.PropertysOrganisation.ToLower().Trim().Contains(address) || org.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)).ToList();
+                orgs.RemoveAll(org => !(org.TargetingGender == LocationUser.TargetingGender || org.TargetingGender.Trim() == "0"));
+            }
+            else
+            {
+                orgs = socialForm?.InerOrganisations?.ToList();
+            }
             orgs.RemoveAll(r => !(r.IsChilde == LocationUser.IsChilde || r.IsChilde == null));
             List<ViewOrganisation> viewOrgs = new List<ViewOrganisation>();
             ConvertToViewOrg(orgs, viewOrgs, centrs);
-            Conditions.Add(new Condition()
+            conditions.Add(new Condition()
             {
                 ConditionPay = conditionPay,
                 SocialForm = socialForm,
                 OrganizationsPrz = viewOrgsPrz,
                 SupportOrganizations = viewOrgs
             });
-            var xConditions = Recomendations.Where(r => r.SocialForm != null &&
-                                                              !Conditions.Where(c => c.SocialForm != null)
-                                                                         .Select(cs => cs.SocialForm)
-                                                                         .Contains(r.SocialForm))
-                                                                         .ToList();
-            if (xConditions.Count > 0)
+            if (Recomendations != null && Recomendations.Count != 0)
             {
-                foreach (var item in xConditions)
+                var xConditions = Recomendations.Where(r => r.SocialForm != null &&
+                                                                  !Conditions.Where(c => c.SocialForm != null)
+                                                                             .Select(cs => cs.SocialForm)
+                                                                             .Contains(r.SocialForm))
+                                                                             .ToList();
+                if (xConditions.Count > 0)
                 {
-                    socialForm = null;
-                    socialForm = item.SocialForm;
-                    orgs = socialForm?.InerOrganisations?
-                                              .Where(org => org.IsCanPrz == true).ToList();
-                    orgs.RemoveAll(r => !(r.IsChilde == LocationUser.IsChilde || r.IsChilde == null));
-                    orgs.RemoveAll(r => !(r.PropertysOrganisation.ToLower().Trim().Contains(address) || r.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)));
-                    _buff = startOrgPrz.Where(s => s.PropertysOrganisation.ToLower().Trim().Contains(address) ||
-                                                            s.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)).ToList();
-                    buff = _buff.Where(b => b.InerOrganisations
-                        .Where(i => i.SocialForms.Select(sf => sf.IDSocialForm)
-                        .Contains(socialForm.IDSocialForm))
-                        .ToList().Count > 0).ToList();
-                    viewOrgsPrz = new List<ViewOrganisation>();
-                    ConvertToViewOrg(buff, viewOrgsPrz, centrs);
-                    _viewOrgsPrz = new List<ViewOrganisation>();
-                    ConvertToViewOrg(orgs, _viewOrgsPrz, centrs);
-                    viewOrgsPrz.AddRange(_viewOrgsPrz);
-                    if (socialForm.IDSocialForm != 1)
+                    foreach (var item in xConditions)
                     {
-                        orgs.RemoveAll(r => !(r.PropertysOrganisation.ToLower().Trim().Contains(address) || r.PropertysOrganisation.ToLower().Trim().Contains(alterAddress)));
-                    }
-                    orgs = orgs.Where(org => org.TargetingGender == LocationUser.TargetingGender || org.TargetingGender.Trim() == "0").ToList();
-                    orgs = orgs.Where(org => org.IsChilde == LocationUser.IsChilde || org.IsChilde == null).ToList();
-                    viewOrgs = new List<ViewOrganisation>();
-                    ConvertToViewOrg(orgs, viewOrgs, centrs);
-                    if (!Conditions.Select(c => c.SocialForm.IDSocialForm).ToList().Contains(socialForm.IDSocialForm))
-                    {
-                        Conditions.Add(new Condition()
-                        {
-                            ConditionPay = true,
-                            SocialForm = socialForm,
-                            OrganizationsPrz = viewOrgsPrz,
-                            SupportOrganizations = viewOrgs
-                        });
+                        socialForm = null;
+                        socialForm = item.SocialForm;
+                        bool? xConditionPay = item.ConditionPay == null ? false : item.ConditionPay;
+                        List<Condition> _conditions = new List<Condition>();
+                        GetCondition(_conditions, socialForm, xConditionPay, area, _socialForms, null, address, alterAddress, startOrgPrz);
+                        _conditions.RemoveAll(c => conditions.Select(s => s.SocialForm.IDSocialForm).Contains(c.SocialForm.IDSocialForm));
+                        conditions.AddRange(_conditions);
                     }
                 }
             }

@@ -16,15 +16,16 @@
                 <div class="rules">
                     <p class="rules">Для получения онлайн - консультации по определению индивидуальной потребности в социальных услугах, просим ответить на вопросы анкеты.</p>
                     <p class="rules">Сведения, которые Вы сообщаете о себе анализируются на условиях анонимности, что гарантирует защиту Ваших персональных данных, и позволяют получить информацию о Ваших правах на получение социальных услуг.</p>
-                    <p class="rules">Для выбора вариантов ответов необходимо отметить курсором поле выбора варианта ответа: @Html.CheckBox("Yes", "No") и нажать на кнопку <input class="btn btn-success" type="button" value="Далее" onclick="" /> для перехода к следующему вопросу.</p>
+                    <p class="rules"><label><span class="label">Для выбора вариантов ответов необходимо отметить курсором поле выбора варианта ответа: </span>@Html.CheckBox("cox", new { @class = "ch", id = "startPageCheckBoxtest" })<span id="startPageCheckBoxCustomtest" class="chcustom"></span></label> и нажать на кнопку <input class="btn btn-success" type="button" value="Далее" onclick="" /> для перехода к следующему вопросу.</p>
                 </div>
                 <div class="rules important">
                     <span class="important">Важно!</span>
                     <span class="rules">В соответствии с Федеральным законом от 27 июля 2006 года № 152-ФЗ "О персональных данных" онлайн - консультант не дает ответы на вопросы, содержащие персональные данные.</span>
                     <p class="important">    </p>
                 </div>
-                <form action="~/GeoLocation/ConsentToTheProcessingOfGeodata" method="post" class="default_page">
-                    <span class="important">Перед прохождением онлайн-опроса</span> <span class="compliance">необходимо принять согласие на обработку Ваших ответов на вопросы: @Html.CheckBox("_checked", new {@class="checkBoxOnStartPage" })</span>
+                @using (Html.BeginForm("ConsentToTheProcessingOfGeodata", "GeoLocation", FormMethod.Post, new { @class = "default_page" }))
+                {
+                    <div class="line-bootom"><span class="important">Перед прохождением онлайн-опроса</span> <label><span class="label">необходимо принять согласие на обработку Ваших ответов на вопросы:</span>@Html.CheckBox("_cheker", new {@class="ch", id= "startPageCheckBox" })<span id="startPageCheckBoxCustom" class="chcustom"></span></label></div>
                                                                                     <p class="important">    </p>
                     <div class="rules important">
                         <span class="important">Обращаем Ваше внимание</span>
@@ -32,11 +33,35 @@
                         <p class="important">    </p>
                     </div>
                     <div class="rules-consent">                        
-                        <input class="btn btn-default" type="submit" value="Продолжить" />
+                        <button name="action" class="btn btn-default" type="submit" value="go">Продолжить</button>
                         <span class="voicerONDefault"><img src="~/Content/Image/voicer.png" />@Html.CheckBox("_voicerON")  Вкл/Выкл голос</span>
                     </div>
-                </form>
+                }
             </section>
         </div>
     </div>
 </div>
+<script>
+    var element = document.getElementById('startPageCheckBoxCustom');
+    var check = document.getElementById('startPageCheckBox');
+    element.addEventListener("click", function () {
+        var list = this.classList;
+        if (list.contains('_checked')) {
+            this.classList.remove('_checked');
+        }
+        else
+            this.classList.add('_checked');
+    }
+    );
+    var element = document.getElementById('startPageCheckBoxCustomtest');
+    var check = document.getElementById('startPageCheckBoxtest');
+    element.addEventListener("click", function () {
+        var list = this.classList;
+        if (list.contains('_checked')) {
+            this.classList.remove('_checked');
+        }
+        else
+            this.classList.add('_checked');
+    }
+    )
+    </script>

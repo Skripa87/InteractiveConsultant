@@ -229,7 +229,7 @@ namespace InteractiveConsultant.Controllers
                 if (numberQuestion == 0) return RedirectToAction("StartInterview", new { _voicerON });
                 else return View(questions.ElementAt(numberQuestion));
             }
-            else if (action.Equals("end"))
+            else if (action.Equals("end") || LocationUser.IsChilde == true)
             {
                 return RedirectToAction("ResultPage", new List<string> { });
             }
@@ -292,6 +292,7 @@ namespace InteractiveConsultant.Controllers
             }
             int scorePointforTest = 0;
             Result result = ManagerInterview.GetResultInterview(_interview, out scorePointforTest);
+            //ViewData["Score"] = scorePointforTest;
             return View(_interview.Result);
         }
 

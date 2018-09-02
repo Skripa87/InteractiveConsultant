@@ -230,6 +230,59 @@ span.important {
 .rules-attention {
     margin-top: 15px;
 }
+
+/****************************DEFAULT PAGE CHECKBOX*********************************/
+.ch{
+    display:none;
+}
+
+.chcustom {
+    position: relative; /* Обязательно задаем, чтобы мы могли абсолютным образом позиционировать псевдоэлемент внютри нашего кастомного чекбокса */
+    width: 20px; /* Обязательно задаем ширину */
+    height: 20px; /* Обязательно задаем высоту */
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.chcustom,
+.label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+span.label {
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: .25em;
+    padding: 0px 5px 1px 0px;
+}
+
+._checked {
+    background: url('Image/checker.png') no-repeat center;
+    border-radius: .25em;
+}
+
+.line-bootom {
+    border-bottom: solid 1px;
+}
+
+.ch:checked + .chcustom::before{
+    content: ""; 
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
+    background: green;
+    border-radius: 2px;
+}
+
 /*******************************FOOTER_CSS**************************************/
 footer {
     margin-top: 15px;

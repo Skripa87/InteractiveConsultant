@@ -21,6 +21,15 @@
             </div>
         </div>
     }
+    else if (Model.Conditions.Count == 1 && Model.Conditions.First().SocialForm.IDSocialForm == 6)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <p>@Model.Conditions.First().SocialForm.NameSocialForm</p>
+                <p>@Model.Conditions.First().SocialForm.TextForView: </p><a href="https://asp2.bashkortostan.ru/aspnet/">https://asp2.bashkortostan.ru/aspnet/</a>
+            </div>
+        </div>
+    }
     else if (Model.Conditions.Count > 0)
     {
         foreach (var item in Model.Conditions)
@@ -31,10 +40,19 @@
                 </div>
             </div>
         }
-
         <div class="row">
             <div class="col-md-12">
-                <p>Предлагаем Вам обратится с заявлением о предоставлении социальных услуг в организацию, уполномоченную на признание граждан, нуждающимися в социальных услугах и оформление ИППСУ(индивидуальная программа предоставления социальных услуг):</p>
+                <span>Предлагаем Вам обратиться с заявлением о предоставлении социальных услуг в организацию, уполномоченную на признание граждан, нуждающимися в социальных услугах</span>
+                @if (Model.Conditions.Count == 1 && Model.Conditions.First().SocialForm.IDSocialForm == 4)
+                {
+                    <span></span>
+                }
+                else
+                {
+                    <span>
+                        и оформление ИППСУ(индивидуальная программа предоставления социальных услуг)
+                    </span>
+                }
             </div>
         </div>
         <div class="row">
@@ -46,10 +64,11 @@
             <div class="col-md-12 line-bootom">
                 @if (Model.Conditions.FindAll(o => o.OrganizationsPrz.Count > 0).Count > 0)
                 {
-                    <h3 class="prz">По району проживания, Вы можете обратится в ближайшее отделение:</h3>
+                    <h3 class="prz">По району проживания, Вы можете обратиться в ближайшее отделение:</h3>
                 }
                 @foreach (var item in Model.Conditions)
                 {
+                    if (item.SocialForm.IDSocialForm == 5) { continue; }
                     if (item.OrganizationsPrz.Count > 0)
                     {
                         foreach (var xitem in item.OrganizationsPrz)
@@ -72,6 +91,15 @@
             <div class="col-md-12 line-bootom">
                 @foreach (var item in Model.Conditions)
                 {
+                    if (item.SocialForm.IDSocialForm == 5) { continue; }
+                    if (item.SupportOrganizations.Count == 0)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Для получения информации о поставщиках социальных услуг в Вашем районе, Вы можете обратится: @(Model?.Centr?.NameOrganisation == null ? "" : Model?.Centr?.NameOrganisation), адрес: @(Model?.Centr?.PropertysOrganisation == null ? "" : Model?.Centr?.PropertysOrganisation) </p>
+                            </div>
+                        </div>
+                    }
                     if (item.SupportOrganizations.Count > 0)
                     {
                         string countSupport = "";
@@ -84,16 +112,50 @@
                             countSupport = "поставщику";
                         }
                         <div class="line-bootom">
-                        <h3 class="prz">Для @(item.SocialForm.IDSocialForm != 5 ? item.SocialForm.TextForView.Replace("Предоставление", "получения") + ". Вы можете обратится к " + countSupport + " социальных услуг:" : item.SocialForm.TextForView + "в организациях:")</h3>
-                        @foreach (var xitem in item.SupportOrganizations)
-                        {
-                            <p>  - @xitem.NameOrganisation, адрес: @xitem.PropertysOrganisation; </p>
-                        }
-                            </div>
+                            <h3 class="prz">Для @(item.SocialForm.IDSocialForm != 5 ? item.SocialForm.TextForView.Replace("Предоставление", "получения") + ". Вы можете обратиться к " + countSupport + " социальных услуг:" : item.SocialForm.TextForView + "в организациях:")</h3>
+                            @foreach (var key in item.SupportOrganizations.Keys)
+                            {
+                                if (key == "")
+                                {
+                                    foreach (var xitem in item.SupportOrganizations[key])
+                                    {
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h6 class="heading">@xitem.NameOrganisation, адрес @xitem.PropertysOrganisation</h6>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    var collapseClass = "collapse" + key + "soc" + item.SocialForm.IDSocialForm;
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" data-toggle="collapse" data-target="#@collapseClass">
+                                            <h6 class="heading">@(key + ((item.SupportOrganizations[key].Count > 1) ? "подробности + " : "")) </h6>
+                                        </div>
+                                        <div class="panel-body collapse" id="@collapseClass">
+                                            @foreach (var xitem in item.SupportOrganizations[key])
+                                            {
+                                                if (key.Contains(xitem.NameOrganisation)) { continue; }
+                                                if (xitem.IDOrganisation == 1111111) { continue; }
+                                                <p>  - @xitem.NameOrganisation, адрес: @xitem.PropertysOrganisation </p>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
                     }
                 }
             </div>
         </div>
     }
-
+    <div class="row result-page-buttons">
+        <div class="col-md-6 left-result-page-button">
+            @Html.ActionLink("Повторить", "Default", "Home", new object { }, new { @class = "btn btn-default result-page" })
+        </div>
+        <div class="col-md-6 right-result-page-button result-page">
+            <a href="http://mintrudrb.ru/" class="btn btn-default">Сайт Министерства</a>
+        </div>
+    </div>
 </div>

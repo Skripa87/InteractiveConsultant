@@ -263,7 +263,7 @@ span.label {
 }
 
 ._checked {
-    background: url('Image/checker.png') no-repeat center;
+    background: url('Image/checker.jpg') no-repeat center;
     border-radius: .25em;
 }
 
@@ -581,4 +581,22 @@ p.question.geolocation {
 }
 h3.prz {
     font-size: 18px;
+}
+
+/**********************************REsultPAge*******************************/
+.row.result-page-buttons {
+    margin-top: 20px;
+}
+
+.col-md-6.right-result-page-button {
+    text-align: -webkit-right;
+    text-align: right;
+}
+
+a.btn.btn-default.result-page {
+    width: 200px;
+}
+
+a.btn.btn-default {
+    width: 200px;
 }

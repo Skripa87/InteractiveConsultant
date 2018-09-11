@@ -210,6 +210,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Image\74.png" />
+    <Content Include="Content\Image\75.png" />
+    <Content Include="Content\Image\76.png" />
+    <Content Include="Content\Image\77.png" />
     <Content Include="Content\Image\bgque.png" />
     <Content Include="Content\Image\bgquestionsblock.png" />
     <Content Include="Content\Image\bottom.png" />
@@ -247,6 +251,7 @@
     <Content Include="Content\Image\bg.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\checker.jpg" />
     <Content Include="Content\Image\checker.png" />
     <Content Include="Content\Image\cher.png" />
     <Content Include="Content\Image\example-1.png" />

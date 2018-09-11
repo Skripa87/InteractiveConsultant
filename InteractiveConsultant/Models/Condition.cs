@@ -13,11 +13,11 @@ namespace InteractiveConsultant.Models
         public bool? ConditionPay { get; set; }
         public virtual List<Result> Results { get; set; }
         public List<ViewOrganisation> OrganizationsPrz { get; set; }
-        public List<ViewOrganisation> SupportOrganizations { get; set; }
+        public Dictionary<string, List<ViewOrganisation>> SupportOrganizations { get; set; }
         public Condition()
         {
             OrganizationsPrz = new List<ViewOrganisation>();
-            SupportOrganizations = new List<ViewOrganisation>();
+            SupportOrganizations = new Dictionary<string, List<ViewOrganisation>>();
             Results = new List<Result>();
         }
     }
